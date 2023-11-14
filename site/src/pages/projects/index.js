@@ -1,10 +1,6 @@
-import {Routes, Route, Link, Outlet} from 'react-router-dom';
+import {Routes, Route, Link} from 'react-router-dom';
 import ProjectPage from './ProjectPage';
-const projects = [
-    { id: 1, title: 'Project 1', description: 'Really cool stuff' },
-    { id: 2, title: 'Project 2', description: 'Even cooler stuff' },
-    { id: 3, title: 'Project 3', description: 'How does she do it!!' },
-  ];
+import {projects} from './project_list';
 
 function ProjectList({projects}) {
     return (
@@ -13,10 +9,10 @@ function ProjectList({projects}) {
                 Projects
             </h2>
             <ul>
-                {projects.map((project) => (
-                    <li key={project.id} className="project-card">
-                        <h3><Link to={`${project.id}`}>{project.title}</Link></h3>
-                        <p>{project.description}</p>
+                {Object.entries(projects).map((project) => (
+                    <li key={project[0]} className="project-card">
+                        <h3><Link to={`${project[0]}`}>{project[1].title}</Link></h3>
+                        <p>{project[1].description}</p>
                     </li>
                 ))}
             </ul>

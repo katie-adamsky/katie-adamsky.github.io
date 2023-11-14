@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'; 
 import {Home, About, Projects} from './pages';
 import Layout from './layout';
-import ProjectPage from './pages/projects/ProjectPage';
 
 function App() {
   return (
