@@ -1,8 +1,7 @@
 import {useParams, Link} from 'react-router-dom';
 
-const ProjectPage = () => {
-    const { projectId } = useParams();
-  
+function ProjectPage() {
+  const {projectId} = useParams();
     return (
       <div>
         <h2>Project Page</h2>

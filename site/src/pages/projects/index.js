@@ -1,44 +1,36 @@
 import {Routes, Route, Link, Outlet} from 'react-router-dom';
 import ProjectPage from './ProjectPage';
-
 const projects = [
-    { id: 1, title: 'Project 1', description: 'Description for Project 1' },
-    { id: 2, title: 'Project 2', description: 'Description for Project 2' },
-    { id: 3, title: 'Project 3', description: 'Description for Project 3' },
-    // Add more projects as needed
+    { id: 1, title: 'Project 1', description: 'Really cool stuff' },
+    { id: 2, title: 'Project 2', description: 'Even cooler stuff' },
+    { id: 3, title: 'Project 3', description: 'How does she do it!!' },
   ];
 
-  const ProjectCard = ({project}) => {
+function ProjectList({projects}) {
     return (
-      <div className="project-card">
-        <h3>{project.title}</h3>
-        <p>{project.description}</p>
-        <Link to={project.id}>Learn more</Link>
-      </div>
-    );
-  };
-
-const ProjectList = () => {
-    return (
-    <div>
-        {projects.map((project) => (
-        <ProjectCard project={project}/>
-        ))}
-    </div>
+        <>
+            <h2>
+                Projects
+            </h2>
+            <ul>
+                {projects.map((project) => (
+                    <li key={project.id} className="project-card">
+                        <h3><Link to={`${project.id}`}>{project.title}</Link></h3>
+                        <p>{project.description}</p>
+                    </li>
+                ))}
+            </ul>
+        </>
     );
 }
 
 const Projects = () => {
     return (
         <div className="project-feed">
-            <h2>
-                Projects
-            </h2>
             <Routes>
-                <Route index element={<ProjectList />} />
-                <Route path="/:projectId" element={<ProjectPage />} />
+                <Route index element={<ProjectList projects={projects} />} />
+                <Route path=":projectId" element={<ProjectPage />}/>
             </Routes>
-            <Outlet />
         </div>
     );
 };
