@@ -9,47 +9,37 @@ to encourage you to explore the space
 */
 
 let skipped_cells = [];
-function setup() {
-
-  createCanvas(3000, 3000);
-  // drawingContext.shadowOffsetX = 5;
-  // drawingContext.shadowOffsetY = -5;
-  // drawingContext.shadowBlur = 10;
-  // drawingContext.shadowColor = "black";
-  colorMode(HSB); 
-
-  //randomly delete some of the stars 
-  for(let i=0; i<75; i++) {
-    skipped_cells[i] = [[floor(Math.random()*20), floor(Math.random()*20)], floor(Math.random()*7+1)];
-  }
+function setup(p5) {
+    p5.createCanvas(1000, 600);
 }
 
-let base_size = 150, size_change = 0, inhaling = true, paused = false;
+let base_size = 100, size_change = 0, inhaling = true, paused = false;
 let lerp_color1, lerp_color2, color1 = 0, color2 = 1, color3 = 2, color4 = 3;
 
-async function draw() {
-  background("black"); 
-  noStroke();
+function draw(p5) {
+  p5.background("white"); 
+  p5.noStroke();
   let elements = {
-    water: color(212, 44, 100), 
-    fire: color(4, 68, 100), 
-    earth: color(130, 65, 68), 
-    air: color(304, 8, 100),
+    water: p5.color(212, 44, 100), 
+    fire: p5.color(4, 68, 100), 
+    earth: p5.color(130, 65, 68), 
+    air: p5.color(304, 8, 100),
   }
+  
   if (!paused) {
     if (size_change >= 65 || size_change <= -42) {
       inhaling = !inhaling;
     }
-    let gradient_position = map(abs(size_change), 0, 65, 0, 1);
+    let gradient_position = p5.map(Math.abs(size_change), 0, 65, 0, 1);
     if (inhaling) {
       size_change += 2;
     } else {
       size_change -= 2;
     }
-    lerp_color1 = lerpColor(Object.entries(elements)[color1][1], Object.entries(elements)[color2][1], gradient_position);
-    lerp_color2 = lerpColor(Object.entries(elements)[color3][1], Object.entries(elements)[color4][1], gradient_position);
+    lerp_color1 = p5.lerpColor(Object.entries(elements)[color1][1], Object.entries(elements)[color2][1], gradient_position);
+    lerp_color2 = p5.lerpColor(Object.entries(elements)[color3][1], Object.entries(elements)[color4][1], gradient_position);
   }
-  tesselation(base_size/2, base_size/2, base_size + size_change);
+  tesselation(p5, base_size/2, base_size/2, base_size + size_change);
 }
 
 function mousePressed() {
@@ -67,44 +57,46 @@ function keyPressed() {
   }
 }
 
-function tesselation(x, y, size) {
+function tesselation(p5, x, y, size) {
   let centerX = x, centerY = y;
-  for(let i=0; i < 20; i++) {
-    for(let j=0; j < 20; j++) {
-      let skip = 0;
-      index = skipped_cells.findIndex(coordinates => JSON.stringify(coordinates[0]) === JSON.stringify([i,j]));
-      if (index !== -1){
-        skip = skipped_cells[index][1];
-      }
-      if (skip !== 1) {
-        fill(lerp_color1);
-        star(centerX, centerY, size/2);
-      }
-      if (skip !== 2) {
-        fill("black");
-        star(centerX, centerY, size/2.65);
-      } 
-      if (skip !== 3) {
-        fill(lerp_color1);
-        star(centerX, centerY, size/4);
-      }
-      if (skip !== 4) {
-        fill("black");
-        star(centerX, centerY, size/8);
-      }
-      if (skip !== 5) {
-        fill(lerp_color2);
-        inverted_star(centerX+base_size/2, centerY+base_size/2, (base_size-size_change)/5);
-      }
-      if (skip !== 6) {
-        fill("black");
-        inverted_star(centerX+base_size/2, centerY+base_size/2, (base_size-size_change)/10);
-      }
-      if (skip !== 7) {
-        fill(lerp_color2);
-        inverted_star(centerX+base_size/2, centerY+base_size/2, (base_size-size_change)/20);
-      }
-      centerX += base_size;
+  for(let i=0; i < 10; i++) {
+    for(let j=0; j < 10; j++) {
+        let skip = 0;
+        let index = skipped_cells.findIndex(coordinates => JSON.stringify(coordinates[0]) === JSON.stringify([i,j]));
+        if (index !== -1){
+          skip = skipped_cells[index][1];
+        }
+        if (skip !== 1) {
+        p5.fill(lerp_color1);
+        star(p5, centerX, centerY, size/2);
+        }
+        if (skip !== 2) {
+        p5.fill("black");
+        star(p5, centerX, centerY, size/2.65);
+        } 
+        if (skip !== 3) {
+        p5.fill(lerp_color1);
+        star(p5, centerX, centerY, size/4);
+        }
+        if (skip !== 4) {
+        p5.fill("black");
+        star(p5, centerX, centerY, size/8);
+        }
+        if(j<9 && i < 5){
+            if (skip !== 5) {
+            p5.fill(lerp_color2);
+            inverted_star(p5, centerX+base_size/2, centerY+base_size/2, (base_size-size_change)/5);
+            }
+            if (skip !== 6) {
+            p5.fill("black");
+            inverted_star(p5, centerX+base_size/2, centerY+base_size/2, (base_size-size_change)/10);
+            }
+            if (skip !== 7) {
+            p5.fill(lerp_color2);
+            inverted_star(p5, centerX+base_size/2, centerY+base_size/2, (base_size-size_change)/20);
+            }
+        }
+        centerX += base_size;
     }
     centerX = x;
     centerY += base_size;
@@ -114,77 +106,52 @@ function tesselation(x, y, size) {
 
 
 
-function star(centerX, centerY, size) {
-  let angle = TWO_PI / 16; 
-  beginShape();
+function star(p5, centerX, centerY, size) {
+  let angle = p5.TWO_PI / 16; 
+  p5.beginShape();
   let x, y;
-  let vertices = [];
   for (let i = 0; i < 16; i++) {
-    if (i%4 == 0) {
-      x = centerX + (base_size/2) * cos(i * angle);
-      y = centerY + (base_size/2) * sin(i * angle);
-    } else if (i%2 == 0) {
-      x = centerX + (size+size_change > (base_size /2) ? (base_size/2) : (size+size_change)) * cos(i * angle);
-      y = centerY + (size+size_change > (base_size/2) ? (base_size/2) : (size+size_change)) * sin(i * angle);
+    if (i%4 === 0) {
+      x = centerX + (base_size/2) * Math.cos(i * angle);
+      y = centerY + (base_size/2) * Math.sin(i * angle);
+    } else if (i%2 === 0) {
+      x = centerX + (size+size_change > (base_size /2) ? (base_size/2) : (size+size_change)) * Math.cos(i * angle);
+      y = centerY + (size+size_change > (base_size/2) ? (base_size/2) : (size+size_change)) * Math.sin(i * angle);
     } else {
-      x = centerX + 0.765 * (size) * cos(i * angle);
-      y = centerY + 0.765 * size * sin(i * angle);
+      x = centerX + 0.765 * (size) * Math.cos(i * angle);
+      y = centerY + 0.765 * size * Math.sin(i * angle);
     }
-    vertex(x, y);
+    p5.vertex(x, y);
   }
-  endShape(CLOSE);
+  p5.endShape(p5.CLOSE);
 }
 
-function inverted_star(centerX, centerY, size) {
-  let angle = TWO_PI / 16; 
-  beginShape();
+function inverted_star(p5, centerX, centerY, size) {
+  let angle = p5.TWO_PI / 16; 
+  p5.beginShape();
   let x, y;
-  let vertices = [];
   for (let i = 0; i < 16; i++) {
-    if (i%4 == 0) {
-      x = centerX + (base_size/2) * cos(i * angle);
-      y = centerY + (base_size/2) * sin(i * angle);
-    } else if (i%2 == 0) {
-      magnitude = (size-size_change > (base_size /2) ? (base_size/2) : (size-size_change));
+    if (i%4 === 0) {
+      x = centerX + (base_size/2) * Math.cos(i * angle);
+      y = centerY + (base_size/2) * Math.sin(i * angle);
+    } else if (i%2 === 0) {
+      let magnitude = (size-size_change > (base_size /2) ? (base_size/2) : (size-size_change));
       if (magnitude < -30) {
         magnitude = -30;
       }
-      x = centerX + magnitude * cos(i * angle);
-      y = centerY + magnitude * sin(i * angle);
+      x = centerX + magnitude * Math.cos(i * angle);
+      y = centerY + magnitude * Math.sin(i * angle);
     } else {
-      x = centerX + 0.765 * (size) * cos(i * angle);
-      y = centerY + 0.765 * size * sin(i * angle);
+      x = centerX + 0.765 * (size) * Math.cos(i * angle);
+      y = centerY + 0.765 * size * Math.sin(i * angle);
     }
-    vertex(x, y);
+    p5.vertex(x, y);
   }
-  endShape(CLOSE);
+  p5.endShape(p5.CLOSE);
 }
 
 
+export {draw, setup, mousePressed, keyPressed} 
 
 
-function delay(milliseconds){
-    return new Promise(resolve => {
-        setTimeout(resolve, milliseconds);
-    });
-}
-
-// async function flowerOfLife(x, y, radius) {
-//   let h = 100, s = 20, b = 100;
-//   let max_depth = 2;
-//   let flower = async function(centerX, centerY, depth, hsb) {
-//     //fill(hsb);
-//     ellipse(centerX,centerY, 2*radius);
-//     const points = [];
-//     if (depth >= max_depth) return;
-//     for (let i=0; i < 6; i++) {
-//       theta = i * PI/3;
-//       x = centerX + radius * Math.cos(theta);
-//       y = centerY + radius * Math.sin(theta);
-//       points.push([x, y]);
-//       await flower(x,y, depth+1, color(h + 75, s, b));
-//     }
-//   }
-//   await flower(x, y, 0, color(h,s,b));
-// }
 
