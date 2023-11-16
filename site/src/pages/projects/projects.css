@@ -1,0 +1,32 @@
+  .project-feed {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .project-card {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    padding: 20px;
+    width: calc(50% - 30px);
+    justify-content: space-between;
+  }
+  
+  h3 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: #666;
+    font-size: 1em;
+    line-height: 1.4;
+  }
