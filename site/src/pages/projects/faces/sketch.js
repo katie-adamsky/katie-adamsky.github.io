@@ -229,8 +229,8 @@ function get_point_with_perlin_noise(p5, xCoord, yCoord, noiseFactor) {
   let third_eye = false, eye_hue = 0, gradient_position = 0.0, up = true;
   let faces = [];
   
-  function setup(p5) {
-    p5.createCanvas(1000, 400);
+  function setup(p5, canvasWidth) {
+    p5.createCanvas(canvasWidth, 400);
     p5.colorMode(p5.HSB); 
   
     let centerX = 130, centerY = 200;

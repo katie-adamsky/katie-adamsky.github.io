@@ -2,7 +2,7 @@ const About = () => {
     return (
         <div>
             <h3>
-                About Me - will have resume, social media links etc
+                About Me
             </h3>
         </div>
     );

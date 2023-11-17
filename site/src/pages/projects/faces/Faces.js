@@ -1,10 +1,29 @@
 import { ReactP5Wrapper } from "@p5-wrapper/react";
 import {setup, draw, keyPressed} from './sketch';
 import Project from '.././Project';
+import useWindowDimensions from "../../../layout/useWindowDimensions";
+
+function handleResize(p5, props) {
+  return () => {
+    let {width} = props;
+    if (width > 1000) {
+      width = 1000;
+    }
+    p5.resizeCanvas(width, 400);
+  }
+}
 
 function sketch(p5) {
+  let state = {
+    width: 1000
+  }
+
+  p5.updateWithProps = props => {
+    state = Object.assign(state, props)
+  };
+
   p5.setup = () => {
-    setup(p5);
+    setup(p5, 1000);
   }
   p5.draw = () => {
     draw(p5);
@@ -12,10 +31,12 @@ function sketch(p5) {
   p5.keyPressed = () => {
     keyPressed();
   }
+  p5.windowResized = handleResize(p5, state);
 }
 
 function FacesP5() {
-  return <ReactP5Wrapper sketch={sketch} />;
+  const {width} = useWindowDimensions();
+  return <ReactP5Wrapper sketch={sketch} width={width}/>;
 }
 
 const Faces = new Project(
