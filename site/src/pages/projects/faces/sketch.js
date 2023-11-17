@@ -230,10 +230,10 @@ function get_point_with_perlin_noise(p5, xCoord, yCoord, noiseFactor) {
   let faces = [];
   
   function setup(p5) {
-    p5.createCanvas(1200, 400);
+    p5.createCanvas(1000, 400);
     p5.colorMode(p5.HSB); 
   
-    let centerX = 200, centerY = 200;
+    let centerX = 130, centerY = 200;
     for (let i=0; i<4; i++) {
       faces[i] = new Face(p5, centerX, centerY);
       centerX += 250;

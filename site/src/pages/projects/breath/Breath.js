@@ -29,7 +29,7 @@ const Breath = new Project(
     <p>
       Breath of the Compassionate is the name of an Islamic geometric tessellation.
       You can look at it as a series of diagonally oriented squares - half of them are 
-      expanding outwards while the other half contract. It is a study in balance, in give and take.
+      expanding outwards while the other half contract (it's easier to see this if you pause it). It is a study in balance, in give and take.
     </p>
     <p>
       I also added generative and interactive elements to keep it interesting: you can press any key to 
