@@ -1,0 +1,26 @@
+h3 {
+    color: #333;
+    font-weight: 300;
+    font-size: 1.25em;
+  }
+
+.social-container h3{
+  font-size: 1.05em;
+}
+.social-container {
+  margin-top: 50px;
+}
+
+.about {
+  padding: 25px 50px;
+  max-width: 1000px;
+}
+a.social {
+  margin: 0 1rem;
+  transition: transform 250ms;
+  display: inline-block;
+  color: #8E9AAF;
+}
+a.social:hover {
+  transform: translateY(-2px);
+}

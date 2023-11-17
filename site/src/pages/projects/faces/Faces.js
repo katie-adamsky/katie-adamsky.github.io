@@ -13,6 +13,17 @@ function handleResize(p5, props) {
   }
 }
 
+function setupBasedOnScreenSize(p5, props) {
+  return () => {
+    let {width} = props;
+    if (width > 1000) {
+      width = 1000;
+    }
+    console.log(width);
+    setup(p5, width);
+  }
+}
+
 function sketch(p5) {
   let state = {
     width: 1000
@@ -22,9 +33,7 @@ function sketch(p5) {
     state = Object.assign(state, props)
   };
 
-  p5.setup = () => {
-    setup(p5, 1000);
-  }
+  p5.setup = setupBasedOnScreenSize(p5, state);
   p5.draw = () => {
     draw(p5);
   }
