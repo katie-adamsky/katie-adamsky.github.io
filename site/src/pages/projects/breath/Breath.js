@@ -24,9 +24,20 @@ function BreathP5() {
 
 const Breath = new Project(
   'Breath of the Compassionate', 
-  'A generative animated tessalation', 
-  'TODO longer description',
+  'A generative animated tessellation', 
+  <div>
+    <p>
+      Breath of the Compassionate is the name of an Islamic geometric tessellation.
+      You can look at it as a series of diagonally oriented squares - half of them are 
+      expanding outwards while the other half contract. It is a study in balance, in give and take.
+    </p>
+    <p>
+      I also added generative and interactive elements to keep it interesting: you can press any key to 
+      randomly change the color gradient, or click the animation to pause it.
+    </p>
+  </div>,
   <BreathP5 />,
+  "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/breath/sketch.js",
 );
 
 

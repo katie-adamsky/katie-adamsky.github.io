@@ -1,13 +1,3 @@
-/*
-Breath of the Compassionate is the name of an ancient Islamic geometric tesselation
-You can look at it as a series of diagonal squares, where one half of them are 
-expanding outwards while the other half contract.
-It is a study in balance, give and take.
-I also added generative elements to keep it interesting: you can press any key to 
-randomly change the color gradient, and different stars are skipped each time
-to encourage you to explore the space
-*/
-
 let skipped_cells = [];
 function setup(p5) {
     p5.createCanvas(1000, 600);
@@ -32,9 +22,9 @@ function draw(p5) {
     }
     let gradient_position = p5.map(Math.abs(size_change), 0, 65, 0, 1);
     if (inhaling) {
-      size_change += 2;
+      size_change += 1;
     } else {
-      size_change -= 2;
+      size_change -= 1;
     }
     lerp_color1 = p5.lerpColor(Object.entries(elements)[color1][1], Object.entries(elements)[color2][1], gradient_position);
     lerp_color2 = p5.lerpColor(Object.entries(elements)[color3][1], Object.entries(elements)[color4][1], gradient_position);

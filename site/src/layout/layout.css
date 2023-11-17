@@ -14,13 +14,14 @@ body {
 }
 
 header {
+  margin-top: 20px;
   text-align: center;
-  display: block;
+  /* display: block; */
 }
 
 .content {
   margin-top: 20px;
-  display: block;
+  /* display: block; */
 }
 
 .name{

@@ -1,12 +1,10 @@
+  @import url("https://use.fontawesome.com/releases/v5.6.1/css/all.css"); /* github icon */
+
   .project-feed {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
     padding: 20px;
-  }
-
-  ul {
-    list-style-type: none;
+    width: 1000px;
   }
 
   .project-card {
@@ -15,14 +13,28 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 15px;
     padding: 20px;
-    width: calc(50% - 30px);
+    width: calc(45% - 40px);
     justify-content: space-between;
   }
+
+  .project a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #2f234f;
+    text-decoration: none;
+    padding-left: 5px;
+  }
+
+  .project h1 {
+    color: #242020;
+    font-weight: 500;
+    font-size: 2em;
+  }
   
-  h3 {
+  .project h2 {
     color: #333;
+    font-weight: 300;
     font-size: 1.5em;
-    margin-bottom: 10px;
   }
   
   p {
