@@ -8,8 +8,6 @@ function handleResize(p5, props) {
     let {width} = props;
     if (width > 1000) {
       width = 1000;
-    } else if (width < 500) {
-      width = 500;
     }
     p5.resizeCanvas(width, 600);
   }
