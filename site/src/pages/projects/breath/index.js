@@ -1,6 +1,6 @@
 import { ReactP5Wrapper } from "@p5-wrapper/react";
 import {setup, draw, mousePressed, keyPressed} from './sketch'
-import Project from '.././Project';
+import Project from '../Project';
 import useWindowDimensions from "../../../layout/useWindowDimensions";
 
 function handleResize(p5, props) {
@@ -8,7 +8,7 @@ function handleResize(p5, props) {
     let {width} = props;
     if (width > 1000) {
       width = 1000;
-    }
+    } 
     p5.resizeCanvas(width, 600);
   }
 }
