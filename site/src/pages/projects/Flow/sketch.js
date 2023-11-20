@@ -6,7 +6,7 @@
   set showField to True to visualize the vectors
 */
 var rows, cols, flowField;
-var noiseScale=70, gridScale = 10;
+var noiseScale=10, gridScale = 10;
 var showField = false;
 
 function drawFlowField(p5, base, vec) {
@@ -23,53 +23,42 @@ function drawFlowField(p5, base, vec) {
 class Particle {
   constructor(loc, dir, speed) {
     this.loc = loc;
+    this.prev = loc;
     this.dir = dir;
     this.speed = speed;
-    this.history = [];
-    this.history.push(this.loc);
   }
 
   move(p5) {
-    let flowFieldIndex = Math.floor(this.loc.x/gridScale) + Math.floor(this.loc.y/gridScale)*cols;
-    if (flowFieldIndex < flowField.length && flowFieldIndex >= 0) {
-      this.dir = flowField[flowFieldIndex];
-    }
-    let vel = this.dir.copy();
-    this.loc.add(vel.mult(this.speed));
-    this.history.push(this.loc.copy());
-    if (this.history.length > 30) {
-      this.history.shift();
+    if (this.loc.x<0 || this.loc.x>p5.width || this.loc.y<0 || this.loc.y>p5.height) {
+        this.loc = p5.createVector(p5.random(p5.width*1.2), p5.random(p5.height), 2);
+        this.prev = this.loc;
+        this.dir = p5.createVector(p5.cos(0), p5.sin(0));
+    } else {
+      let flowFieldIndex = Math.floor(this.loc.x/gridScale) + Math.floor(this.loc.y/gridScale)*cols;
+      if (flowFieldIndex < flowField.length && flowFieldIndex >= 0) {
+        this.dir = flowField[flowFieldIndex];
+      }
+      let vel = this.dir.copy();
+      this.prev = this.loc.copy();
+      this.loc.add(vel.mult(this.speed));
     }
     this.trail(p5);
-    if (this.loc.x<0 || this.loc.x>p5.width || this.loc.y<0 || this.loc.y>p5.height) {
-      this.loc = p5.createVector(p5.random(p5.width*1.2), p5.random(p5.height), 5);
-      this.dir = p5.createVector(p5.cos(0), p5.sin(0));
-      this.history = [];
-    }
   }
 
   trail(p5) {
-    let col = p5.color("black");
-    p5.push();
-    let prev = this.history[0];
-    for (let i = 1; i < this.history.length; i++) {
-      let cur = this.history[i];
-      p5.stroke(col);
-      p5.strokeWeight(cur.z);
-      p5.line(cur.x, cur.y, prev.x, prev.y);
-      col = p5.lerpColor(p5.color("black"), p5.color("white"), i/10);
-      prev = cur;
-    }
-    p5.pop();
+    p5.stroke("white");
+    p5.strokeWeight(this.loc.z);
+    p5.line(this.loc.x, this.loc.y, this.prev.x, this.prev.y);
   }
 }
 
-let numParticles = 100, particles = [numParticles];
+let numParticles = 2000, particles = [numParticles];
 
 function setup(p5, canvasWidth) {
   let canvasHeight = 600;
   p5.createCanvas(canvasWidth, canvasHeight);
   p5.colorMode(p5.HSB); 
+  p5.background(p5.color(0, 0, 0, 5));
   cols = Math.floor(p5.width/gridScale);
   rows = Math.floor(p5.height/gridScale);
   flowField = new Array(rows * cols);
@@ -78,14 +67,17 @@ function setup(p5, canvasWidth) {
   var dir = p5.createVector(p5.cos(angle), p5.sin(angle));
   particles = new Array(numParticles);
   for (let i=0; i < particles.length; i++) {
-    var loc = p5.createVector(p5.random(p5.width*1.2), p5.random(p5.height), 5);
+    var loc = p5.createVector(p5.random(p5.width*1.2), p5.random(p5.height), 2);
     var speed = p5.random(0.25,1);
     particles[i] = new Particle(loc, dir, speed);
   }
 }
 
 function draw(p5) {
-  p5.background(p5.color(0, 0, 0, 5));
+  //layer on a little gray on each refresh so the older particles slowly disappear
+  p5.blendMode(p5.MULTIPLY);
+  p5.background(p5.color("#c8c8c8"));
+  p5.blendMode(p5.BLEND);
   for (let y = 0; y <= rows; y++) {
     for (let x = 0; x <= cols; x++) {
       let angle = p5.noise(x/noiseScale, y/noiseScale, p5.frameCount/noiseScale)*p5.TWO_PI;
