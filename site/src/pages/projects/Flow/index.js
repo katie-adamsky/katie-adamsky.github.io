@@ -10,6 +10,7 @@ function handleResize(p5, props) {
       width = 1000;
     } 
     p5.resizeCanvas(width, 600);
+    p5.background(p5.color(0, 0, 0, 5));
   }
 }
 
@@ -46,12 +47,12 @@ function FlowP5() {
 
 const Flow = new Project(
   'Flow Field', 
-  'TODO', 
+  '', 
   <div>
     TODO
   </div>,
   <FlowP5 />,
-  "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/breath/sketch.js",
+  "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/Flow/sketch.js",
 );
 
 
