@@ -1,7 +1,8 @@
 import { ReactP5Wrapper } from "@p5-wrapper/react";
-import {setup, draw} from './sketch';
+import {setup, draw, FLOW_FIELD_MODE} from './sketch';
 import Project from '../Project';
 import useWindowDimensions from "../../../layout/useWindowDimensions";
+import { useState } from 'react';
 
 function handleResize(p5, props) {
   return () => {
@@ -24,32 +25,57 @@ function setupBasedOnScreenSize(p5, props) {
   }
 }
 
+function drawWithProps(p5, props) {
+  return () => {
+    let {mode} = props;
+    draw(p5, mode);
+  } 
+}
+
 function sketch(p5) {
   let state = {
-    width: 1000
+    width: 1000,
+    mode: FLOW_FIELD_MODE.PERLIN_NOISE,
   }
 
   p5.updateWithProps = props => {
     state = Object.assign(state, props)
   };
   p5.setup = setupBasedOnScreenSize(p5, state);
-  p5.draw = () => {
-    draw(p5);
-  };
+  p5.draw = drawWithProps(p5, state);
   p5.windowResized = handleResize(p5, state);
 }
 
 
-function FlowP5() {
+const FlowP5 = () => {
   const {width} = useWindowDimensions();
-  return <ReactP5Wrapper sketch={sketch} width={width}/>;
-}
+  const [mode, setMode] = useState(FLOW_FIELD_MODE.PERLIN_NOISE);
+  const dropdownOptions = Object.values(FLOW_FIELD_MODE);
+
+  const handleDropdownChange = (event) => {
+    setMode(event.target.value);
+  };
+
+  return (
+    <div>
+      <label htmlFor="dropdown">Flow field mode: </label>
+      <select id="dropdown" onChange={handleDropdownChange} value={mode}>
+        {dropdownOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      <ReactP5Wrapper sketch={sketch} width={width} mode={mode}/> 
+    </div>
+  );
+};
 
 const Flow = new Project(
   'Flow Field', 
-  '', 
+  'Invisible forces guiding thousands of particles', 
   <div>
-    TODO
+    TODO more explanation
   </div>,
   <FlowP5 />,
   "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/Flow/sketch.js",

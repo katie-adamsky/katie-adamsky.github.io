@@ -1,7 +1,7 @@
 var rows, cols, flowField;
 var showField = false, gridScale = 5;
 
-let numParticles = 10000, particles = [numParticles], particleSize = 0.5;
+let numParticles = 3000, particles = [numParticles], particleSize = 0.5;
 
 class Particle {
   constructor(loc, dir, speed) {
@@ -51,17 +51,16 @@ function setup(p5, canvasWidth) {
 }
 
 const FLOW_FIELD_MODE = {
-  SIN_WAVE: 'sin_wave',
-  PERLIN_NOISE: 'perlin_noise',
-  BLACK_HOLE: 'black_hole',
+  SIN_WAVE: 'Sine Wave',
+  PERLIN_NOISE: 'Perlin Noise',
 };
 
 function defineFlowField(p5, mode) {
   //Params for sin wave mode (starting point: curve 2.5, zoom 0.08, noiseScale 50)
   let curve=2.5;
-  let zoom=0.08;
+  let zoom=0.05;
   //denominator for noise function (decrease for more noise)
-  var noiseScale=50; 
+  var noiseScale=25; 
   let angle;
   for (let y = 0; y <= rows; y++) {
     for (let x = 0; x <= cols; x++) {
@@ -69,7 +68,7 @@ function defineFlowField(p5, mode) {
         angle = (Math.cos(x*zoom) + Math.sin(y*zoom))*curve*p5.noise(x/noiseScale, y/noiseScale, p5.frameCount/noiseScale);
       } else if (mode === FLOW_FIELD_MODE.PERLIN_NOISE) {
         angle = p5.noise(x/noiseScale, y/noiseScale, p5.frameCount/noiseScale)*p5.TWO_PI;
-      }
+      } 
       let vector = p5.constructor.Vector.fromAngle(angle, gridScale);
       if (showField) {
         let base = p5.createVector(x * gridScale, y*gridScale);
@@ -91,14 +90,14 @@ function drawFlowField(p5, base, vec) {
   p5.pop();
 }
 
-function draw(p5) {
+function draw(p5, mode) {
   //layer on a little color on each refresh so the older particles slowly disappear
   p5.blendMode(p5.MULTIPLY);
   p5.background(p5.color("#CAF0F8"));
   p5.blendMode(p5.BLEND);
 
   //update the flow field each frame
-  defineFlowField(p5, FLOW_FIELD_MODE.PERLIN_NOISE);
+  defineFlowField(p5, mode);
 
   //update each particle
   for (let i=0; i < particles.length; i++) {
@@ -106,4 +105,4 @@ function draw(p5) {
   }
 }
 
-export {setup, draw}
+export {setup, draw, FLOW_FIELD_MODE}
