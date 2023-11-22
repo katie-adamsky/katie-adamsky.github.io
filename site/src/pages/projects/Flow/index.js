@@ -73,7 +73,7 @@ const FlowP5 = () => {
 
 const Flow = new Project(
   'Flow Field', 
-  'Invisible forces guiding thousands of particles', 
+  'Invisible forces guide thousands of particles', 
   <div>
     TODO more explanation
   </div>,
