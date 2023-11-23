@@ -3,6 +3,7 @@
 html {
   /* background: linear-gradient(to bottom, rgb(244, 247, 249) 0%, #CBC0D3 100%);  */
   height: 100rem;
+  background-color: #994ff3;
 }
 
 body {
@@ -14,18 +15,22 @@ body {
 }
 
 header {
-  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 15;
+  width: 100%;
   text-align: center;
   /* display: block; */
 }
 
 .content {
   margin-top: 20px;
+  background-color: #f2eef5;
   /* display: block; */
 }
 
 .name{
-  color: #242020;
+  /* color: #242020; */
+  color: #f2eef5;
   font-weight: 500;
   position: relative;
   align-items: center;
@@ -49,7 +54,8 @@ header {
 }
 
 header a {
-  color: black;
+  /* color: black; */
+  color: #f2eef5;
   text-decoration: none;
 }
 
@@ -64,12 +70,14 @@ header a {
 .nav-elements ul a {
   font-size: 16px;
   font-weight: 400;
-  color: #2f234f;
+  /* color: #2f234f; */
+  color: #f2eef5;
   text-decoration: none;
 }
 
 .nav-elements ul a.active {
-  color: #574c4c;
+  /* color: #574c4c; */
+  color: #f2eef5;
   font-weight: 500;
   position: relative;
 }
@@ -81,7 +89,8 @@ header a {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #574c4c;
+  /* background-color: #574c4c; */
+  background-color: #fbdd74;
 }
 
 .name a.active{
