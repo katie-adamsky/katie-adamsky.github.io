@@ -9,7 +9,7 @@ function Navbar() {
                 <h2 className={`name`}><NavLink to="/">Katie Adamsky</NavLink></h2>
                 <ul>
                   <li>
-                    <NavLink to="/about" >About Me
+                    <NavLink to="/blog" >Blog
                     </NavLink>
                   </li>
                   <li>

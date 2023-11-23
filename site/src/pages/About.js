@@ -19,6 +19,13 @@ const About = () => {
                 Right now, I am making generative art with a metaphysical flavor.
             </p>
             <p>
+                You can check out the blog, which will mostly cover urbanism topics for now. It is powered by Contentful,
+                a delightful content management service.
+            </p>
+            <p>
+                You can also take a look at my p5 projects in the Projects tab.
+            </p>
+            <p>
                 When I'm not in front of the good screen, I am a volunteer librarian and a baritone singer in a barbershop chorus.
             </p>
             <div className="social-container">
