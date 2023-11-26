@@ -50,9 +50,9 @@ function ProjectList({projects}) {
                   const img = thumbnails.find(item => item.projectName===project[1].title);
                   return (
                     <div key={project[0]} className="project-card">
-                      <img src={`${img?.thumbnail?.url}`} alt={`${img?.projectName}`}/>
-                      <h3><Link to={`${project[0]}`}>{project[1].title}</Link></h3>
-                      <p>{project[1].summary}</p>
+                        <img src={`${img?.thumbnail?.url}`} alt={`${img?.projectName}`}/>
+                        <h3><Link to={`${project[0]}`}>{project[1].title}</Link></h3>
+                        <p>{project[1].summary}</p>
                     </div>
                 );})}
         </div>

@@ -25,9 +25,10 @@
   }
 
   .project-card img {
-    max-height: 100px;
-    max-width: 100px;
-    float: right;
+    display: flex;
+    max-height: 150px;
+    max-width: 150px;
+    float: inline-start;
     margin-right: 20px;
     align-items: center;
   }
@@ -67,5 +68,18 @@
   @media (max-width: 600px) {
     .project {
       max-width: 375px; /* Adjust this value based on your design needs */
+    }
+
+    .project-card h3 {
+      font-size: 1rem;
+    }
+    .project-card p {
+      font-size: 0.75rem;
+    }
+
+    img {
+      float: none;
+      max-height: 100px;
+      max-width: 100px;
     }
   }
