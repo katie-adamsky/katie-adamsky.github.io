@@ -41,6 +41,16 @@ function sketch(p5) {
   p5.keyPressed = () => {
     keyPressed();
   }
+  p5.touchStarted = () => {
+    let touches = p5.touches;
+    if (touches.length > 0 && touches[0].x >= 0 
+      && touches[0].x <= p5.width 
+      && touches[0].y >= 0 
+      && touches[0].y <= p5.height) {
+        keyPressed();
+        //default behavior calls mousePressed too
+    }
+  }
   p5.windowResized = handleResize(p5, state);
 }
 
@@ -61,7 +71,7 @@ const Breath = new Project(
     </p>
     <p>
       I also added generative and interactive elements to keep it interesting: you can press any key to 
-      randomly change the color gradient, or click the animation to pause it.
+      randomly change the color gradient, or click/tap the animation to pause it.
     </p>
   </div>,
   <BreathP5 />,

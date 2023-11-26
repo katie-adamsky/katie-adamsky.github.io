@@ -19,7 +19,6 @@ function setupBasedOnScreenSize(p5, props) {
     if (width > 1000) {
       width = 1000;
     }
-    console.log(width);
     setup(p5, width);
   }
 }
@@ -40,6 +39,15 @@ function sketch(p5) {
   p5.keyPressed = () => {
     keyPressed();
   }
+  p5.touchStarted = () => {
+    let touches = p5.touches;
+    if (touches.length > 0 && touches[0].x >= 0 
+      && touches[0].x <= p5.width 
+      && touches[0].y >= 0 
+      && touches[0].y <= p5.height) {
+        keyPressed();
+    }
+  }
   p5.windowResized = handleResize(p5, state);
 }
 
@@ -53,7 +61,7 @@ const Faces = new Project(
   'Randomly generated faces', 
   <p>
     This was a great learning exercise in p5.js. I learned how to draw basic shapes and apply Perlin noise to them to give 
-    them a hand-drawn feel. Press any key for a fun surprise!
+    them a hand-drawn feel. Tap the screen or press any key for a fun surprise!
   </p>, 
   <FacesP5 />,
   "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/faces/sketch.js"

@@ -49,23 +49,23 @@ function get_point_with_perlin_noise(p5, xCoord, yCoord, noiseFactor) {
       draw_perlin_arc(p5, centerX, centerY, size, noiseFactor, 0, p5.TWO_PI);
     }
   
-    function draw_perlin_line(p5, startX, startY, endX, endY) {
-      const numPoints = 100;
-      let outline_points = [];
-      for (let i=0; i <= numPoints; i++) {
-        let xCoord = p5.lerp(startX, endX, p5.map(i, 0, numPoints, 0.0, 1.0));
-        let yCoord = p5.lerp(startY, endY, p5.map(i, 0, numPoints, 0.0, 1.0));
+    // function draw_perlin_line(p5, startX, startY, endX, endY) {
+    //   const numPoints = 100;
+    //   let outline_points = [];
+    //   for (let i=0; i <= numPoints; i++) {
+    //     let xCoord = p5.lerp(startX, endX, p5.map(i, 0, numPoints, 0.0, 1.0));
+    //     let yCoord = p5.lerp(startY, endY, p5.map(i, 0, numPoints, 0.0, 1.0));
         
-        outline_points[i] = get_point_with_perlin_noise(p5, xCoord, yCoord);
-      }
+    //     outline_points[i] = get_point_with_perlin_noise(p5, xCoord, yCoord);
+    //   }
   
-      p5.beginShape();
-      for(let i = 0; i <= numPoints; i++) {
-        const { x, y } = outline_points[i];
-        p5.vertex(x, y);
-      }
-      p5.endShape();
-    }
+    //   p5.beginShape();
+    //   for(let i = 0; i <= numPoints; i++) {
+    //     const { x, y } = outline_points[i];
+    //     p5.vertex(x, y);
+    //   }
+    //   p5.endShape();
+    // }
   
   class Eyes {
     centerX;
@@ -95,8 +95,9 @@ function get_point_with_perlin_noise(p5, xCoord, yCoord, noiseFactor) {
         this.draw_third_eye(p5);
         return;
       }
-      p5.stroke(0);
-      draw_perlin_line(p5, this.centerX, this.centerY - 33, this.centerX, this.centerY - 79);
+      // uncomment this to bring back the weird forehead line
+      // p5.stroke(0);
+      // draw_perlin_line(p5, this.centerX, this.centerY - 33, this.centerX, this.centerY - 79);
       p5.noStroke();
       p5.fill("white");
       draw_perlin_circle(p5, this.eye_coords.right.x, this.eye_coords.right.y, this.eye_size,0);
@@ -239,6 +240,8 @@ function get_point_with_perlin_noise(p5, xCoord, yCoord, noiseFactor) {
       centerX += 250;
     }
   }
+
+  let counter = 1;
   
   function draw(p5) {
     if (third_eye) {
@@ -256,10 +259,17 @@ function get_point_with_perlin_noise(p5, xCoord, yCoord, noiseFactor) {
       p5.background(p5.color(312, 8, 100));
     }
   
-  
-    //draw 4 randomly proportioned faces
-    for(let j = 0; j < faces.length; j++) {
-      faces[j].draw_face(p5);
+    if (p5.width < 400) {
+      counter -= 1;
+      if (counter <= 0) {
+        counter = 350;
+        faces[0] = new Face(p5, p5.width/2, p5.height/2);
+      }
+      faces[0].draw_face(p5);
+    } else {
+      for(let j = 0; j < faces.length; j++) {
+        faces[j].draw_face(p5);
+      }
     }
   }
   
