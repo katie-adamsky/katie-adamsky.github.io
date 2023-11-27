@@ -75,7 +75,9 @@ const Flow = new Project(
   'Flow Field', 
   'Invisible forces guide thousands of particles', 
   <div>
-    TODO more explanation
+    <p>
+      
+    </p>
   </div>,
   <FlowP5 />,
   "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/Flow/sketch.js",

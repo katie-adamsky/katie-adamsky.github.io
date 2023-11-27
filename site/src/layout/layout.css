@@ -25,6 +25,9 @@ header {
 .content {
   margin-top: 20px;
   background-color: #f2eef5;
+  border-style: solid;
+  border-color: #4fc4cf;
+  border-width: 10px;
   /* display: block; */
 }
 
@@ -100,5 +103,9 @@ header a {
 @media (max-width: 600px) {
   .name {
     margin-right: 0px; 
+  }
+
+  .content {
+    border-style: solid none solid none;
   }
 }

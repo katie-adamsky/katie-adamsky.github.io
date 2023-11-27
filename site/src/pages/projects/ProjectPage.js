@@ -1,4 +1,4 @@
-import {useParams, Link} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import projects from './project_list';
 
 function ProjectPage() {
@@ -11,7 +11,6 @@ function ProjectPage() {
         {project.description}
         {project.element}
         <p><i className="fab fa-github"></i><a className="code-link" href={project.source_code_url}>Project code</a></p>
-        <p><Link to="/projects">Back to Projects</Link></p>
       </div>
     );
   };

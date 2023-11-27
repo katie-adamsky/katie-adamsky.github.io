@@ -13,8 +13,8 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 25px;
-    margin: 25px 50px;
-    width: calc(35% - 40px);
+    margin: 20px 40px;
+    width: calc(40% - 40px);
     min-width: 300px;
     justify-content: space-between;
   }
@@ -44,7 +44,6 @@
     font-weight: 400;
     color: #2f234f;
     text-decoration: none;
-    padding-left: 5px;
   }
 
   .project h1 {
