@@ -32,17 +32,17 @@ function Blog() {
         <div className="blog">
             {blogPosts.blogPosts.map((post) => (
             <div key={`${post.fields.slug}`} className="blog-post-card">
-                <div className="header-container">
+                <div className="blog-title">
                     <img src={`${post.fields.featuredImage?.fields?.file?.url}`}
                       alt={`${post.fields.slug}`} className="featured-image"/>
                       <div className="box"> 
                         <h3><Link to={`${post.fields.slug}`}>{post.fields.title}</Link></h3>
                         <p>{`${post.fields.shortDescription}`}</p>
                       </div>
-                      <p className="preview">
+                      {/* <p className="preview">
                         {post.fields?.content?.content?.[0].content?.[0].value}
                         <Link className="preview" to={`${post.fields.slug}`}>See more</Link>
-                      </p>
+                      </p> */}
                 </div>
                 <div className="blog-content">
                     <Outlet />

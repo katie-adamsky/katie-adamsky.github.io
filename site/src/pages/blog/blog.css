@@ -42,9 +42,7 @@ a.preview {
 .box {
     position: absolute;
     width: 40%;
-    top: 50%;
-    left: -1%; 
-    /* transform: translate(-50%, -50%); */
+    transform: translate(5%, -100%);
     z-index: 1; 
     color: white; 
     background: #4fc4cf; 
@@ -61,31 +59,41 @@ img {
     border-radius: 8px;
 }
 
-img.featured-image {
+img.featured-image:not(.blog-post-card) {
     width: 100%;
     min-width: 375px;
     height: auto;
+    border-radius: 0px;
 }
 
-.blog-post h3 {
+.header-container h3 {
+  font-weight: 400;
+  font-size: 1.5rem;
+  display: block;
+  color: #fffffe;
+  position: absolute;
+  transform: translate(20%, -200%);
+  max-width: 60%;
+}
+
+.header-container h3 {
     color: white; 
     background: #4fc4cf; 
     padding: 20px;
     border-radius: 8px;
 }
 
-.blog-post .header-container h3 {
+/* .header-container h3:not(.blog-post-card) {
     font-size: 2rem;
+    font-weight: 400;
     position: absolute;
-    top: 55%;
-    left: 15%; 
-    transform: translate(-50%, -50%);
+    transform: translate(20%, -200%);
     z-index: 1; 
     color: white; 
     background: #4fc4cf; 
     padding: 20px;
     border-radius: 8px;
-}
+} */
 
 img.blog-post-image {
     max-width: 400px;
@@ -105,46 +113,27 @@ img.right {
 }
 
 @media (max-width: 600px) {
-    .content {
-        max-width: 375px;
-    }
     .blog-post {
-        padding: 0px;
-    }
-
-    .blog-post .header-container h3 {
-        font-size: 1.25rem;
-        font-weight: 200;
-        left: 30%;
-        top: 65%;
-        padding: 15px;
-        border-radius: 8px;
-    }
-
-    img.featured-image {
-        border-radius: 0px;
-        max-width: 375px;
-        height: auto;
+        padding: 30px;
     }
 
     img.blog-post-image {
-        min-width: 325px;
-        min-height: 325px;
         justify-content: center;
-        margin: 20px;
+        margin: 0px;
         float: none;
+        max-width: 300px;
     }
 
     .blog-post-card {
         margin: 0px;
+        max-width: 350px;
     }
 
     .box {
         font-size: 0.75rem;
         font-weight: 200;
         width: 80%;
-        top: 50%;
-        left: 10%; 
+        transform: translate(5%, -100%);
         z-index: 1; 
         color: white; 
         background: #4fc4cf; 

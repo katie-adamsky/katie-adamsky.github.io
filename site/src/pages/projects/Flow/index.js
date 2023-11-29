@@ -58,14 +58,16 @@ const FlowP5 = () => {
 
   return (
     <div>
+    <div className="customization">
       <label htmlFor="dropdown">Flow field mode: </label>
-      <select id="dropdown" onChange={handleDropdownChange} value={mode}>
+      <select className="dropdown" id="dropdown" onChange={handleDropdownChange} value={mode}>
         {dropdownOptions.map((option) => (
           <option key={option} value={option}>
             {option}
           </option>
         ))}
       </select>
+      </div>
       <ReactP5Wrapper sketch={sketch} width={width} mode={mode}/> 
     </div>
   );

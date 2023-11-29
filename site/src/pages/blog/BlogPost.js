@@ -31,14 +31,17 @@ function BlogPost(){
   let post = blogPost[0];
 
   return (
-  <div className="blog-post blog">
+    <>
     <div className="header-container">
-      <img src={`${post.fields?.featuredImage?.fields?.file?.url}`}
+    <img src={`${post.fields?.featuredImage?.fields?.file?.url}`}
         alt={`${post.fields?.slug}`} className="featured-image" />
       <h3>{post.fields?.title}</h3>
     </div>
-    <div className="rich-text">{documentToReactComponents(post.fields?.content, options)}</div>
-  </div>);
+    <div className="blog-post blog">
+      <div className="rich-text">{documentToReactComponents(post.fields?.content, options)}</div>
+    </div>
+    </>
+  );
 }
 
 export default BlogPost;

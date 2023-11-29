@@ -3,7 +3,6 @@
   .project-feed {
     display: flex;
     flex-wrap: wrap;
-    max-width: 1100px;
     padding-top: 25px;
     padding-bottom: 25px;
   }
@@ -82,9 +81,19 @@
     line-height: 1.4;
   }
 
+  .dropdown {
+    border-radius: 8px;
+    background-color: #4fc4cf;
+    border: none;
+    color: #fffffe;
+    font-weight: 200;
+    padding: 10px;
+    margin: 10px;
+  }
+
   @media (max-width: 600px) {
     .project {
-      max-width: 375px; /* Adjust this value based on your design needs */
+      max-width: 350px; 
     }
 
     .project-card h3 {
@@ -95,7 +104,6 @@
     }
 
     .project-card img {
-      float: none;
       max-height: 100px;
       max-width: 100px;
     }
