@@ -1,8 +1,12 @@
 .about h3 {
-    color: #333;
-    font-weight: 300;
-    font-size: 1.25em;
-  }
+  color: white; 
+  background: #4fc4cf; 
+  font-weight: 400;
+  font-size: 1.5rem;
+  padding: 20px;
+  border-radius: 8px;
+  justify-content: center;
+}
 
 .social-container h3{
   font-size: 1.05em;
@@ -11,10 +15,27 @@
   margin-top: 50px;
 }
 
-.about {
+.page {
   padding: 25px 50px;
   max-width: 1000px;
 }
+
+.circle-container {
+  position: relative;
+  max-width: 200px;
+  float: left;
+  margin: 20px;
+}
+
+img.katie {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  border: 4px #fbdd74;
+  border-style: solid;
+}
+
 a.social {
   margin: 0 1rem;
   transition: transform 250ms;
@@ -23,4 +44,12 @@ a.social {
 }
 a.social:hover {
   transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  img .katie {
+    float: none;
+    min-width: 100px;
+    height: auto;
+  }
 }

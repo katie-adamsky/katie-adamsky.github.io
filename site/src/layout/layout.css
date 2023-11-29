@@ -34,7 +34,7 @@ header {
 .name{
   /* color: #242020; */
   color: #f2eef5;
-  font-weight: 500;
+  font-weight: 400;
   position: relative;
   align-items: center;
   font-size: 36px;
@@ -94,10 +94,6 @@ header a {
   height: 2px;
   /* background-color: #574c4c; */
   background-color: #fbdd74;
-}
-
-.name a.active{
-  font-weight: 550;
 }
 
 @media (max-width: 600px) {
