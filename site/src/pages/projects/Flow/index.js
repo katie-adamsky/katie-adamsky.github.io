@@ -76,11 +76,15 @@ const Flow = new Project(
   'Invisible forces guide thousands of particles', 
   <div>
     <p>
-      
+      A flow field is a common animation technique for complex systems that need to look natural. 
+      To create one, the programmer divides the canvas into a grid, each with its own vector.
+      As each particle moves through the canvas, the its path is determined by these 
+      invisible vectors.
     </p>
   </div>,
   <FlowP5 />,
   "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/Flow/sketch.js",
+  "teal"
 );
 
 

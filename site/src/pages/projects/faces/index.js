@@ -64,7 +64,8 @@ const Faces = new Project(
     them a hand-drawn feel. Tap the screen or press any key for a fun surprise!
   </p>, 
   <FacesP5 />,
-  "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/faces/sketch.js"
+  "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/faces/sketch.js",
+  "yellow"
 );
 
 export default Faces;

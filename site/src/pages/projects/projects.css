@@ -33,6 +33,24 @@
     align-items: center;
   }
 
+  .project-card img.purple {
+    border: 4px #994ff3;
+    border-radius: 50%;
+    border-style: solid;
+  }
+
+  .project-card img.yellow {
+    border: 4px #fbdd74;
+    border-radius: 50%;
+    border-style: solid;
+  }
+
+  .project-card img.teal {
+    border: 4px #4fc4cf;
+    border-radius: 50%;
+    border-style: solid;
+  }
+
   .project {
     max-width: 1000px;
     padding: 50px;
@@ -76,7 +94,7 @@
       font-size: 0.75rem;
     }
 
-    img {
+    .project-card img {
       float: none;
       max-height: 100px;
       max-width: 100px;

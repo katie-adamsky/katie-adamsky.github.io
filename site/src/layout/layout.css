@@ -29,6 +29,7 @@ header {
   border-width: 10px;
   border-radius: 8px;
   min-height: 500px;
+  max-width: 1200px;
 }
 
 .name{

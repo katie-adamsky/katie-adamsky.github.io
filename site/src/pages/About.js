@@ -31,10 +31,11 @@ const About = () => {
     return (
         <div className="page">
         <div className="about">
-            <div className="circle-container">
-                <img className="katie" src={`${author?.[0].fields?.avatar?.fields?.file?.url}`} alt="katie-adamsky"/>
-            </div>
             <div className="bio">
+                <h3>About me</h3>
+                <div className="circle-container">
+                    <img className="katie" src={`${author?.[0].fields?.avatar?.fields?.file?.url}`} alt="katie-adamsky"/>
+                </div>
                 {documentToReactComponents(author?.[0].fields?.bio, options)}
             </div>
         <div className="social-container">

@@ -76,6 +76,7 @@ const Breath = new Project(
   </div>,
   <BreathP5 />,
   "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/breath/sketch.js",
+  "purple",
 );
 
 
