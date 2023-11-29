@@ -39,10 +39,10 @@ function Blog() {
                         <h3><Link to={`${post.fields.slug}`}>{post.fields.title}</Link></h3>
                         <p>{`${post.fields.shortDescription}`}</p>
                       </div>
-                      {/* <p className="preview">
+                      <p className="preview">
                         {post.fields?.content?.content?.[0].content?.[0].value}
-                        <Link className="preview" to={`${post.fields.slug}`}>See more</Link>
-                      </p> */}
+                        <Link className="preview seemore" to={`${post.fields.slug}`}>See more</Link>
+                      </p>
                 </div>
                 <div className="blog-content">
                     <Outlet />

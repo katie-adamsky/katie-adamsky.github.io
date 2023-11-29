@@ -12,47 +12,44 @@
     background: #fffffe;
 }
 
-/* 
-TODO get the yellow underline working!
-.blog h3::after {
-    content: "";
-    position: absolute;
-    bottom: 50%;
-    left: 0;
-    width: 95%;
-    height: 2px;
-    background-color: #fbdd74;
-  } */
-
 .blog-post-card a:not(.preview) {
     font-weight: 400;
     text-decoration: none;
-    font-size: 2rem;
-    color: #fffffe; 
-}
-
-.blog-post-card p:not(.preview) {
-    color: #fffffe; 
+    color: #181818;
+    font-size: 1.25rem;
 }
 
 a.preview {
     color: #2e2e2e;
 }
 
-.box {
-    position: absolute;
-    width: 40%;
-    transform: translate(5%, -100%);
-    z-index: 1; 
-    color: white; 
-    background: #4fc4cf; 
-    padding: 10px;
-    border-radius: 8px;
+.seemore {
+    padding-left: 5px;
 }
 
-.header-container {
-    position: relative;
-    display: inline-block;
+.blog-post-title {
+  font-weight: 400;
+  font-size: 1.5rem;
+  position: relative;
+  display: block;
+  padding-bottom: 20px;
+}
+
+.blog-post-title::after {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: 0%;
+    width: 100%;
+    height: 2px;
+    background-color: #4fc4cf;
+    z-index: 1;
+  }
+
+h4 {
+    display: block;
+    font-weight: 200;
+    font-size: 1.15rem;
 }
 
 img {
@@ -65,35 +62,6 @@ img.featured-image:not(.blog-post-card) {
     height: auto;
     border-radius: 0px;
 }
-
-.header-container h3 {
-  font-weight: 400;
-  font-size: 1.5rem;
-  display: block;
-  color: #fffffe;
-  position: absolute;
-  transform: translate(20%, -200%);
-  max-width: 60%;
-}
-
-.header-container h3 {
-    color: white; 
-    background: #4fc4cf; 
-    padding: 20px;
-    border-radius: 8px;
-}
-
-/* .header-container h3:not(.blog-post-card) {
-    font-size: 2rem;
-    font-weight: 400;
-    position: absolute;
-    transform: translate(20%, -200%);
-    z-index: 1; 
-    color: white; 
-    background: #4fc4cf; 
-    padding: 20px;
-    border-radius: 8px;
-} */
 
 img.blog-post-image {
     max-width: 400px;
@@ -127,17 +95,5 @@ img.right {
     .blog-post-card {
         margin: 0px;
         max-width: 350px;
-    }
-
-    .box {
-        font-size: 0.75rem;
-        font-weight: 200;
-        width: 80%;
-        transform: translate(5%, -100%);
-        z-index: 1; 
-        color: white; 
-        background: #4fc4cf; 
-        padding: 10px;
-        border-radius: 8px;
     }
 }

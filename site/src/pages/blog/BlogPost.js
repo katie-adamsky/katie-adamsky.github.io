@@ -32,13 +32,12 @@ function BlogPost(){
 
   return (
     <>
-    <div className="header-container">
-    <img src={`${post.fields?.featuredImage?.fields?.file?.url}`}
-        alt={`${post.fields?.slug}`} className="featured-image" />
-      <h3>{post.fields?.title}</h3>
-    </div>
     <div className="blog-post blog">
-      <div className="rich-text">{documentToReactComponents(post.fields?.content, options)}</div>
+      <div className="header-container"><h3 className="blog-post-title">{post.fields?.title}</h3></div>
+      <div className="blog-text">
+        <h4 className="subtitle">{post.fields?.shortDescription}</h4>
+        <div className="rich-text">{documentToReactComponents(post.fields?.content, options)}</div>
+      </div>
     </div>
     </>
   );
