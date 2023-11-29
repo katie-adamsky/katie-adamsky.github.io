@@ -7,9 +7,19 @@
 .blog-post-card {
     margin: 25px;
     min-width: 300px;
-    padding: 40px;
     border-radius: 8px;
     background: #fffffe;
+}
+
+.blog-post-card .featured-image {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  height: auto;
+}
+
+.box {
+    margin: 60px;
 }
 
 .blog-post-card a:not(.preview) {
@@ -56,10 +66,7 @@ img {
     border-radius: 8px;
 }
 
-img.featured-image:not(.blog-post-card) {
-    width: 100%;
-    min-width: 375px;
-    height: auto;
+img.featured-image {
     border-radius: 0px;
 }
 
