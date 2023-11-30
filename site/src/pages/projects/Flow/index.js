@@ -59,6 +59,7 @@ const FlowP5 = () => {
   const [zoom, setZoom] = useState(ZOOM);
   const [curve, setCurve] = useState(CURVE);
   const [showField, toggleField] = useState(false);
+  const [gridScale, setGridScale] = useState(5);
 
   return (
     <div>
@@ -96,7 +97,7 @@ const FlowP5 = () => {
               <label htmlFor="curve">Curve: </label>
               <input
                 type="number"
-                step="0.01"
+                step="0.5"
                 id="curve"
                 value={curve}
                 onChange={input => setCurve(input.target.value)}
@@ -109,10 +110,10 @@ const FlowP5 = () => {
         }
 
           <div className="options-container">
-            <label htmlFor="noiseScale">Noise scale: </label>
+            <label htmlFor="noiseScale">Noise scale (smaller = more noise): </label>
             <input
               type="number"
-              step="1"
+              step="10"
               min="0"
               max="2000"
               id="noiseScale"
@@ -142,11 +143,27 @@ const FlowP5 = () => {
               type="checkbox"
               checked={showField}
               onChange={() => toggleField(!showField)}
+              className="number-input"
+            />
+          </div>
+          <div className="options-container">
+            <label htmlFor="gridScale">Flow field resolution: </label>
+            <input
+              type="number"
+              step="1"
+              min="0"
+              max="1000"
+              id="gridScale"
+              value={gridScale}
+              onChange={input => setGridScale(input.target.value)}
+              placeholder=""
+              className="number-input"
             />
           </div>
       </div>
       <ReactP5Wrapper sketch={sketch} width={width} 
-        mode={mode} zoom={zoom} curve={curve} noiseScale={noiseScale} numParticles={numParticles} showField={showField}/> 
+        mode={mode} zoom={zoom} curve={curve} noiseScale={noiseScale} 
+        numParticles={numParticles} showField={showField} newGridScale={gridScale}/> 
     </div>
   );
 };
@@ -158,8 +175,12 @@ const Flow = new Project(
     <p>
       A flow field is a common animation technique for complex systems that need to look natural. 
       To create one, the programmer divides the canvas into a grid, each with its own vector.
-      As each particle moves through the canvas, the its path is determined by these 
+      As each particle moves through the canvas, its path is determined by these 
       invisible vectors.
+    </p>
+    <p>
+      I highly recommend messing around with the different options - tweaking a variable can completely change 
+      the appearance of the field.
     </p>
   </div>,
   <FlowP5 />,

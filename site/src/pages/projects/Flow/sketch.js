@@ -53,6 +53,7 @@ let NUM_PARTICLES = 3000, particles = [NUM_PARTICLES], particleSize = 0.5;
 const FLOW_FIELD_MODE = {
   SIN_WAVE: 'Sine Wave',
   PERLIN_NOISE: 'Perlin Noise',
+
 };
 
 
@@ -89,13 +90,20 @@ function drawFlowField(p5, base, vec) {
 }
 
 function draw(p5, props) {
+  let {mode, curve, zoom, noiseScale, numParticles, showField, newGridScale} = props;
   //layer on a little color on each refresh so the older particles slowly disappear
   p5.blendMode(p5.MULTIPLY);
   p5.background(p5.color("#CAF0F8"));
   p5.blendMode(p5.BLEND);
 
+  if (newGridScale >= 5 && newGridScale !== gridScale) {
+    gridScale = newGridScale;
+    cols = Math.floor(p5.width/gridScale);
+    rows = Math.floor(p5.height/gridScale);
+  }
+  console.log(gridScale);
+
   //update the flow field each frame
-  let {mode, curve, zoom, noiseScale, numParticles, showField} = props;
   defineFlowField(p5, mode, curve, zoom, noiseScale, showField);
 
   //update each particle
