@@ -1,5 +1,5 @@
 import { ReactP5Wrapper } from "@p5-wrapper/react";
-import {setup, draw, FLOW_FIELD_MODE} from './sketch';
+import {setup, draw, FLOW_FIELD_MODE, CURVE, ZOOM, NOISE_SCALE, NUM_PARTICLES} from './sketch';
 import Project from '../Project';
 import useWindowDimensions from "../../../layout/useWindowDimensions";
 import { useState } from 'react';
@@ -27,8 +27,7 @@ function setupBasedOnScreenSize(p5, props) {
 
 function drawWithProps(p5, props) {
   return () => {
-    let {mode} = props;
-    draw(p5, mode);
+    draw(p5, props);
   } 
 }
 
@@ -36,6 +35,10 @@ function sketch(p5) {
   let state = {
     width: 1000,
     mode: FLOW_FIELD_MODE.PERLIN_NOISE,
+    zoom: ZOOM,
+    curve: CURVE,
+    noiseScale: NOISE_SCALE,
+    numParticles: NUM_PARTICLES,
   }
 
   p5.updateWithProps = props => {
@@ -50,25 +53,100 @@ function sketch(p5) {
 const FlowP5 = () => {
   const {width} = useWindowDimensions();
   const [mode, setMode] = useState(FLOW_FIELD_MODE.PERLIN_NOISE);
+  const [noiseScale, setNoiseScale] = useState(NOISE_SCALE);
+  const [numParticles, setNumParticles] = useState(NUM_PARTICLES);
   const dropdownOptions = Object.values(FLOW_FIELD_MODE);
-
-  const handleDropdownChange = (event) => {
-    setMode(event.target.value);
-  };
+  const [zoom, setZoom] = useState(ZOOM);
+  const [curve, setCurve] = useState(CURVE);
+  const [showField, toggleField] = useState(false);
 
   return (
     <div>
     <div className="customization">
-      <label htmlFor="dropdown">Flow field mode: </label>
-      <select className="dropdown" id="dropdown" onChange={handleDropdownChange} value={mode}>
-        {dropdownOptions.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+        <div className="options-container">
+          <label htmlFor="fieldMode">Flow field mode: </label>
+          <select 
+            className="dropdown" 
+            id="fieldMode" 
+            onChange={(event) => setMode(event.target.value)}
+            value={mode}>
+            {dropdownOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+        {mode===FLOW_FIELD_MODE.SIN_WAVE 
+          ? 
+          <>
+            <div className="options-container">
+              <label htmlFor="zoom">Zoom: </label>
+              <input
+                type="number"
+                step="0.01"
+                id="zoom"
+                value={zoom}
+                onChange={input => setZoom(input.target.value)}
+                placeholder=""
+                className="number-input"
+              />
+            </div>
+            <div className="options-container">
+              <label htmlFor="curve">Curve: </label>
+              <input
+                type="number"
+                step="0.01"
+                id="curve"
+                value={curve}
+                onChange={input => setCurve(input.target.value)}
+                placeholder=""
+                className="number-input"
+              />
+            </div>
+          </>
+          : <></>
+        }
+
+          <div className="options-container">
+            <label htmlFor="noiseScale">Noise scale: </label>
+            <input
+              type="number"
+              step="1"
+              min="0"
+              max="2000"
+              id="noiseScale"
+              value={noiseScale}
+              onChange={input => setNoiseScale(input.target.value)}
+              placeholder=""
+              className="number-input"
+            />
+          </div>
+          <div className="options-container">
+            <label htmlFor="numParticles">Number of Particles: </label>
+            <input
+              type="number"
+              step="100"
+              min="0"
+              max="10000"
+              id="numParticles"
+              value={numParticles}
+              onChange={input => setNumParticles(input.target.value)}
+              placeholder=""
+              className="number-input"
+            />
+          </div>
+          <div className="options-container">
+            <label htmlFor="showField">Show flow field: </label>
+            <input
+              type="checkbox"
+              checked={showField}
+              onChange={() => toggleField(!showField)}
+            />
+          </div>
       </div>
-      <ReactP5Wrapper sketch={sketch} width={width} mode={mode}/> 
+      <ReactP5Wrapper sketch={sketch} width={width} 
+        mode={mode} zoom={zoom} curve={curve} noiseScale={noiseScale} numParticles={numParticles} showField={showField}/> 
     </div>
   );
 };

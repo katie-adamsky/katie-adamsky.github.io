@@ -46,9 +46,7 @@ function ProjectList({projects}) {
     return (
         <div className="project-feed">
                 {Object.entries(projects).map((project) => {
-                console.log();
                   const img = thumbnails.find(item => item.projectName===project[1].title);
-                  console.log(project);
                   return (
                     <div key={project[0]} className="project-card">
                         <div className="circle-container">

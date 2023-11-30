@@ -1,8 +1,3 @@
-var rows, cols, flowField;
-var showField = false, gridScale = 5;
-
-let numParticles = 3000, particles = [numParticles], particleSize = 0.5;
-
 class Particle {
   constructor(loc, dir, speed) {
     this.loc = loc;
@@ -42,7 +37,7 @@ function setup(p5, canvasWidth) {
 
   var angle = 0; //during draw(), the direction will be determined by the flow field
   var dir = p5.createVector(p5.cos(angle), p5.sin(angle));
-  particles = new Array(numParticles);
+  particles = new Array(NUM_PARTICLES);
   for (let i=0; i < particles.length; i++) {
     var loc = p5.createVector(p5.random(p5.width*1.2), p5.random(p5.height), particleSize);
     var speed = p5.random(0.25,1);
@@ -50,17 +45,20 @@ function setup(p5, canvasWidth) {
   }
 }
 
+var rows, cols, flowField;
+
+let gridScale = 5;
+
+let NUM_PARTICLES = 3000, particles = [NUM_PARTICLES], particleSize = 0.5;
 const FLOW_FIELD_MODE = {
   SIN_WAVE: 'Sine Wave',
   PERLIN_NOISE: 'Perlin Noise',
 };
 
-function defineFlowField(p5, mode) {
-  //Params for sin wave mode (starting point: curve 2.5, zoom 0.08, noiseScale 50)
-  let curve=2.5;
-  let zoom=0.05;
-  //denominator for noise function (decrease for more noise)
-  var noiseScale=25; 
+
+let NOISE_SCALE = 50, ZOOM=0.05, CURVE=2.5;
+
+function defineFlowField(p5, mode, curve, zoom, noiseScale, showField) {
   let angle;
   for (let y = 0; y <= rows; y++) {
     for (let x = 0; x <= cols; x++) {
@@ -90,19 +88,27 @@ function drawFlowField(p5, base, vec) {
   p5.pop();
 }
 
-function draw(p5, mode) {
+function draw(p5, props) {
   //layer on a little color on each refresh so the older particles slowly disappear
   p5.blendMode(p5.MULTIPLY);
   p5.background(p5.color("#CAF0F8"));
   p5.blendMode(p5.BLEND);
 
   //update the flow field each frame
-  defineFlowField(p5, mode);
+  let {mode, curve, zoom, noiseScale, numParticles, showField} = props;
+  defineFlowField(p5, mode, curve, zoom, noiseScale, showField);
 
   //update each particle
-  for (let i=0; i < particles.length; i++) {
-    particles[i].move(p5);
+  for (let i=0; i < numParticles; i++) {
+    if (i < particles.length) {
+      particles[i].move(p5);
+    } else {
+      var loc = p5.createVector(p5.random(p5.width*1.2), p5.random(p5.height), particleSize);
+      var speed = p5.random(0.25,1);
+      var dir = p5.createVector(p5.cos(0), p5.sin(0));
+      particles.push(new Particle(loc, dir, speed));
+    }
   }
 }
 
-export {setup, draw, FLOW_FIELD_MODE}
+export {setup, draw, FLOW_FIELD_MODE, CURVE, ZOOM, NOISE_SCALE, NUM_PARTICLES}

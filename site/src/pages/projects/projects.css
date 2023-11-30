@@ -81,6 +81,10 @@
     line-height: 1.4;
   }
 
+  .options-container {
+    display: inline-block;
+  }
+
   .dropdown {
     border-radius: 8px;
     background-color: #4fc4cf;
@@ -89,6 +93,17 @@
     font-weight: 200;
     padding: 10px;
     margin: 10px;
+    margin-right: 20px;
+  }
+
+  .number-input {
+    border-radius: 8px;
+    font-weight: 200;
+    border: none;
+    background-color: #fffffe;
+    padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
   }
 
   @media (max-width: 600px) {
