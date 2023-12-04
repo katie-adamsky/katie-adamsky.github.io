@@ -108,9 +108,8 @@ const FlowP5 = () => {
           </>
           : <></>
         }
-
           <div className="options-container">
-            <label htmlFor="noiseScale">Noise scale (smaller = more noise): </label>
+            <label htmlFor="noiseScale">Noise scale (smaller = noisier): </label>
             <input
               type="number"
               step="10"

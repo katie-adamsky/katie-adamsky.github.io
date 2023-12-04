@@ -122,4 +122,13 @@
       max-height: 100px;
       max-width: 100px;
     }
+
+    .dropdown {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .number-input {
+      font-size: 1.1rem;
+    }
   }
