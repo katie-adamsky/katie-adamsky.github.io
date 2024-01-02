@@ -133,7 +133,7 @@ const Meditation = new Project(
 
   </p>, 
   <MeditationP5 />,
-  "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/meditation/sketch.js",
+  "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/Meditation/sketch.js",
   "purple"
 );
 
