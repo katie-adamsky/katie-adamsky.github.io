@@ -11,9 +11,11 @@
         main { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 5rem; }
 
         .schedule-table { width: 100%; border-collapse: collapse; }
-        .schedule-table th { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 0 0.875rem; border-bottom: 1px solid var(--border); }
-        .schedule-table td { padding: 1rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
-        .schedule-table td:first-child { color: var(--muted); width: 160px; }
+        .schedule-table th { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 1.5rem 0.875rem 0; border-bottom: 1px solid var(--border); }
+        .schedule-table td { padding: 1rem 1.5rem 1rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .schedule-table th:last-child, .schedule-table td:last-child { padding-right: 0; }
+        .schedule-table td:first-child { color: var(--muted); width: 110px; }
+        .schedule-table td:nth-child(2) { color: var(--muted); width: 110px; }
 
         .class-title { font-weight: 500; margin-bottom: 0.2rem; }
         .class-teacher { font-size: 0.8125rem; color: var(--muted); }
@@ -40,7 +42,7 @@
 <main>
     <div class="page-header">
         <h1>Summer Schedule</h1>
-        <p>Sundays 10–11 AM &nbsp;·&nbsp; May 3 – August 30, 2026 &nbsp;·&nbsp; No class May 10, May 24, July 5</p>
+        <p>Most Sunday mornings, May - August 2026</p>
     </div>
 
     <div id="loading" class="state-box">Loading schedule…</div>
