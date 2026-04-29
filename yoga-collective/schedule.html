@@ -17,8 +17,8 @@
         .schedule-table td:first-child { color: var(--muted); width: 110px; }
         .schedule-table td:nth-child(2) { color: var(--muted); width: 110px; }
 
-        .class-title { font-weight: 500; margin-bottom: 0.2rem; }
-        .class-teacher { font-size: 0.8125rem; color: var(--muted); }
+        .class-teacher { font-weight: 500; margin-bottom: 0.2rem; }
+        .class-description { font-size: 0.8125rem; color: var(--muted); }
         .no-class { color: var(--muted); font-style: italic; }
         .state-box { padding: 3rem 0; text-align: center; color: var(--muted); font-size: 0.875rem; }
         .btn { margin-top: 2.5rem; }
@@ -127,8 +127,8 @@
             if (SKIPPED.some(s => date.includes(s))) {
                 infoCell.innerHTML = '<span class="no-class">No class</span>';
             } else {
-                let html = title ? `<div class="class-title">${escapeHtml(title)}</div>` : '';
-                if (teacher) html += `<div class="class-teacher">${escapeHtml(teacher)}</div>`;
+                let html = teacher ? `<div class="class-teacher">${escapeHtml(teacher)}</div>` : '';
+                if (title) html += `<div class="class-description">${escapeHtml(title)}</div>`;
                 infoCell.innerHTML = html;
             }
             tr.appendChild(infoCell);
