@@ -244,18 +244,20 @@
         const tbody = document.getElementById('schedule-body');
 
         const dateIdx = headers.findIndex(h => /date/i.test(h));
+        const timeIdx = headers.findIndex(h => /time/i.test(h));
         const titleIdx = headers.findIndex(h => /type/i.test(h));
         const teacherIdx = headers.findIndex(h => /teacher|instructor/i.test(h));
 
         rows.forEach(row => {
             const date = row[dateIdx] || '';
+            const time = row[timeIdx] || '';
             const title = row[titleIdx] || '';
             const teacher = row[teacherIdx] || '';
 
             const tr = document.createElement('tr');
 
             const dateCell = document.createElement('td');
-            dateCell.textContent = date;
+            dateCell.innerHTML = `${escapeHtml(date)}${time ? `<div class="class-teacher">${escapeHtml(time)}</div>` : ''}`;
             tr.appendChild(dateCell);
 
             const infoCell = document.createElement('td');
