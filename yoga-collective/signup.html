@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up – Yoga Collective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAFAFA;
+            --bg-alt: #F0F0F0;
+            --border: #DCDCDC;
+            --text: #1C1C1C;
+            --muted: #6B6B6B;
+            --black: #1C1C1C;
+            --error-bg: #FFF5F5;
+            --error: #B91C1C;
+            --success-bg: #F0FDF4;
+            --success: #15803D;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8125rem;
+            text-decoration: none;
+            color: var(--text);
+            letter-spacing: 0.04em;
+        }
+
+        .nav-links a:hover { text-decoration: underline; }
+
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 4rem 2rem 5rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        /* Form sections */
+        .form-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-section:last-of-type { border-bottom: none; }
+
+        .form-section-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group:last-child { margin-bottom: 0; }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            background: #fff;
+            font-family: inherit;
+            font-size: 0.875rem;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.15s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--black);
+        }
+
+        .info-block {
+            background: var(--bg-alt);
+            padding: 0.875rem 1rem;
+            margin-bottom: 0.875rem;
+            font-size: 0.8125rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .info-block a { color: var(--text); font-weight: 500; }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--black);
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            font-size: 0.875rem;
+            font-weight: 400;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        /* Donation tiers */
+        .donation-tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin: 0.75rem 0 1.25rem;
+        }
+
+        .tier {
+            padding: 0.875rem 0.5rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            background: #fff;
+        }
+
+        .tier-amount {
+            font-size: 1.125rem;
+            font-weight: 500;
+            display: block;
+        }
+
+        .tier-name {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 0.2rem;
+            display: block;
+            letter-spacing: 0.04em;
+        }
+
+        .payment-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .payment-block {
+            flex: 1;
+            background: var(--bg-alt);
+            padding: 0.75rem 1rem;
+            font-size: 0.8125rem;
+        }
+
+        .payment-block strong {
+            display: block;
+            font-size: 0.6875rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .payment-block a { color: var(--text); text-decoration: none; font-weight: 500; }
+        .payment-block a:hover { text-decoration: underline; }
+
+        /* Messages */
+        .message {
+            padding: 0.875rem 1rem;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .message-error { background: var(--error-bg); color: var(--error); border-left: 3px solid var(--error); }
+        .message-success { background: var(--success-bg); color: var(--success); border-left: 3px solid var(--success); }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1.5rem 0;
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.875rem;
+            font-family: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: 1px solid var(--black);
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .btn-primary { background: var(--black); color: #fff; }
+        .btn-primary:hover { background: #333; border-color: #333; }
+        .btn-primary:disabled { background: var(--border); border-color: var(--border); cursor: not-allowed; }
+
+        .btn-secondary { background: transparent; color: var(--black); }
+        .btn-secondary:hover { background: var(--bg-alt); }
+
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        footer p { margin-bottom: 0.35rem; }
+        footer a { color: var(--text); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        .footer-mission { margin-top: 1.25rem; font-style: italic; color: #aaa; }
+
+        @media (max-width: 600px) {
+            nav { padding: 1rem 1.25rem; }
+            main { padding: 2.5rem 1.25rem 4rem; }
+            .payment-row { flex-direction: column; }
+            .radio-group { flex-direction: column; gap: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">Yoga Collective</a>
+    <ul class="nav-links">
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div class="page-header">
+        <h1>Class Registration</h1>
+        <p>Community-supported classes &nbsp;·&nbsp; Sundays 10–11 AM &nbsp;·&nbsp; Queen Anne, Seattle</p>
+    </div>
+
+    <div id="error" class="message message-error"></div>
+    <div id="success" class="message message-success"></div>
+    <div id="loading" class="loading">Registering you for class…</div>
+
+    <form id="registrationForm">
+
+        <div class="form-section">
+            <p class="form-section-label">Select a Class</p>
+            <div class="form-group">
+                <label for="selectedClass">Class date *</label>
+                <select id="selectedClass" name="selectedClass" required>
+                    <option value="">— Choose a class —</option>
+                    <option value="Sunday May 3">Sunday, May 3</option>
+                    <option value="Sunday May 17">Sunday, May 17</option>
+                    <option value="Sunday May 31">Sunday, May 31</option>
+                    <option value="Sunday June 7">Sunday, June 7</option>
+                    <option value="Sunday June 14">Sunday, June 14</option>
+                    <option value="Sunday June 21">Sunday, June 21</option>
+                    <option value="Sunday June 28">Sunday, June 28</option>
+                    <option value="Sunday July 12">Sunday, July 12</option>
+                    <option value="Sunday July 19">Sunday, July 19</option>
+                    <option value="Sunday July 26">Sunday, July 26</option>
+                    <option value="Sunday August 2">Sunday, August 2</option>
+                    <option value="Sunday August 9">Sunday, August 9</option>
+                    <option value="Sunday August 16">Sunday, August 16</option>
+                    <option value="Sunday August 23">Sunday, August 23</option>
+                    <option value="Sunday August 30">Sunday, August 30</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <p class="form-section-label">Your Information</p>
+
+            <div class="form-group">
+                <label for="fullName">Full name *</label>
+                <input type="text" id="fullName" name="fullName" placeholder="First and last name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Waiver *</label>
+                <div class="info-block">
+                    Before registering, please complete our liability waiver — it takes 2 minutes.<br><br>
+                    <a href="https://bit.ly/4vOAJMv" target="_blank">Complete the waiver →</a>
+                </div>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="waiverCompleted" value="Yes" required>
+                        <span>Yes, I've completed the waiver</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="waiverCompleted" value="No">
+                        <span>Not yet</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Commitment to attend *</label>
+                <div class="info-block">
+                    Class sizes are intentionally limited. By registering you commit to attend. If your plans change, please cancel so another student can take your spot.
+                </div>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="commitmentToAttend" value="Yes" required>
+                        <span>Yes, I commit to attend</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="commitmentToAttend" value="No">
+                        <span>Not ready to commit</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <p class="form-section-label">Support Our Community</p>
+
+            <p style="font-size: 0.875rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.75;">We operate on a pay-what-you-can basis. Your contribution helps sustain our shared space.</p>
+
+            <div class="donation-tiers">
+                <div class="tier">
+                    <span class="tier-amount">$5</span>
+                    <span class="tier-name">Supporter</span>
+                </div>
+                <div class="tier">
+                    <span class="tier-amount">$10</span>
+                    <span class="tier-name">Sustainer</span>
+                </div>
+                <div class="tier">
+                    <span class="tier-amount">$25</span>
+                    <span class="tier-name">Thriving</span>
+                </div>
+            </div>
+
+            <div class="payment-row">
+                <div class="payment-block">
+                    <strong>Venmo</strong>
+                    <a href="https://venmo.com/cityyogacollective" target="_blank">@cityyogacollective</a>
+                </div>
+                <div class="payment-block">
+                    <strong>Zelle</strong>
+                    Monique Thakkar<br>
+                    <a href="mailto:cityyogacollective@gmail.com">cityyogacollective@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 1.25rem;">
+                <label>Donation intent *</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="donationIntent" value="Yes" required>
+                        <span>Yes, I plan to donate</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="donationIntent" value="No">
+                        <span>Not at this time</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Register for Class</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+        </div>
+    </form>
+</main>
+
+<footer>
+    <p>Whim W'him Contemporary Dance Center &nbsp;·&nbsp; 1716 2nd Ave N, Seattle, WA 98109</p>
+    <p><a href="mailto:cityyogacollective@gmail.com">cityyogacollective@gmail.com</a></p>
+    <p class="footer-mission">An inclusive space to move between effort and ease with presence, curiosity, and care.</p>
+</footer>
+
+<script>
+    const form = document.getElementById('registrationForm');
+    const errorDiv = document.getElementById('error');
+    const successDiv = document.getElementById('success');
+    const loadingDiv = document.getElementById('loading');
+    const submitBtn = document.getElementById('submitBtn');
+
+    const APPS_SCRIPT_URL = 'YOUR_DEPLOYMENT_URL_HERE';
+
+    function showError(msg) {
+        errorDiv.textContent = msg;
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
+        loadingDiv.style.display = 'none';
+    }
+
+    function showSuccess(msg) {
+        successDiv.textContent = msg;
+        successDiv.style.display = 'block';
+        errorDiv.style.display = 'none';
+        loadingDiv.style.display = 'none';
+        form.reset();
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorDiv.style.display = 'none';
+        successDiv.style.display = 'none';
+
+        if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_DEPLOYMENT_URL_HERE') {
+            showError('Form not yet configured — check back soon.');
+            return;
+        }
+
+        const waiverVal = document.querySelector('input[name="waiverCompleted"]:checked')?.value;
+        const commitVal = document.querySelector('input[name="commitmentToAttend"]:checked')?.value;
+        const donationVal = document.querySelector('input[name="donationIntent"]:checked')?.value;
+
+        if (waiverVal === 'No') {
+            showError('You must complete the waiver before registering. Use the link above.');
+            return;
+        }
+
+        if (commitVal === 'No') {
+            showError('You must commit to attending to complete registration.');
+            return;
+        }
+
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            waiverCompleted: waiverVal,
+            commitmentToAttend: commitVal,
+            donationIntent: donationVal,
+            selectedClass: document.getElementById('selectedClass').value
+        };
+
+        loadingDiv.style.display = 'block';
+        submitBtn.disabled = true;
+
+        try {
+            const response = await fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                showSuccess('Registration complete — we look forward to seeing you in class.');
+            } else {
+                showError(result.message || 'Something went wrong. Please try again.');
+            }
+        } catch (err) {
+            showError('Unable to submit. Please try again or email cityyogacollective@gmail.com.');
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+</script>
+
+</body>
+</html>

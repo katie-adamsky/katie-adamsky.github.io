@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule – Yoga Collective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAFAFA;
+            --bg-alt: #F0F0F0;
+            --border: #DCDCDC;
+            --text: #1C1C1C;
+            --muted: #6B6B6B;
+            --black: #1C1C1C;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8125rem;
+            text-decoration: none;
+            color: var(--text);
+            letter-spacing: 0.04em;
+        }
+
+        .nav-links a:hover { text-decoration: underline; }
+
+        main {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 4rem 2rem 5rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        /* Schedule table */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-align: left;
+            padding: 0 0 0.875rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .schedule-table td {
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .schedule-table td:first-child { color: var(--muted); width: 160px; }
+
+        .class-title { font-weight: 500; margin-bottom: 0.2rem; }
+        .class-teacher { font-size: 0.8125rem; color: var(--muted); }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.5rem;
+            background: var(--bg-alt);
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        .no-class { color: var(--muted); font-style: italic; }
+
+        /* Loading/error states */
+        .state-box {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            font-family: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid var(--black);
+            transition: background 0.15s, color 0.15s;
+            margin-top: 2.5rem;
+        }
+
+        .btn-primary { background: var(--black); color: #fff; }
+        .btn-primary:hover { background: #333; border-color: #333; }
+
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        footer p { margin-bottom: 0.35rem; }
+        footer a { color: var(--text); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        .footer-mission { margin-top: 1.25rem; font-style: italic; color: #aaa; }
+
+        @media (max-width: 600px) {
+            nav { padding: 1rem 1.25rem; }
+            main { padding: 2.5rem 1.25rem 4rem; }
+            .schedule-table td:first-child { width: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">Yoga Collective</a>
+    <ul class="nav-links">
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div class="page-header">
+        <h1>Summer Schedule</h1>
+        <p>Sundays 10–11 AM &nbsp;·&nbsp; May 3 – August 30, 2026 &nbsp;·&nbsp; No class May 10, May 24, July 5</p>
+    </div>
+
+    <div id="loading" class="state-box">Loading schedule…</div>
+    <div id="error" class="state-box" style="display:none;"></div>
+    <div id="schedule" style="display:none;">
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Class</th>
+                </tr>
+            </thead>
+            <tbody id="schedule-body"></tbody>
+        </table>
+    </div>
+
+    <div style="text-align:center;">
+        <a href="signup.html" class="btn btn-primary">Sign Up for a Class</a>
+    </div>
+</main>
+
+<footer>
+    <p>Whim W'him Contemporary Dance Center &nbsp;·&nbsp; 1716 2nd Ave N, Seattle, WA 98109</p>
+    <p><a href="mailto:cityyogacollective@gmail.com">cityyogacollective@gmail.com</a></p>
+    <p class="footer-mission">An inclusive space to move between effort and ease with presence, curiosity, and care.</p>
+</footer>
+
+<script>
+    const SHEET_ID = '17w9aAjMCPaDekHxzDVgkP_rvAscXj1-B';
+    const SHEET_TAB = 'Summer Series 2026';
+    const API_KEY = 'AIzaSyBRVe6tRJpeag_gL0OuS53BS7nrVrU_hFA';
+
+    const SKIPPED = ['May 10', 'May 24', 'July 5'];
+
+    async function loadSchedule() {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(SHEET_TAB)}?key=${API_KEY}`;
+
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`API error ${res.status}`);
+            const data = await res.json();
+
+            if (!data.values || data.values.length < 2) {
+                showError('No schedule data available yet. Check back soon.');
+                return;
+            }
+
+            renderSchedule(data.values);
+        } catch (err) {
+            showError('Unable to load schedule. Please try again later or email cityyogacollective@gmail.com.');
+        }
+    }
+
+    function renderSchedule(values) {
+        const headers = values[0];
+        const rows = values.slice(1);
+        const tbody = document.getElementById('schedule-body');
+
+        const dateIdx = headers.findIndex(h => /date/i.test(h));
+        const titleIdx = headers.findIndex(h => /class|title|name/i.test(h));
+        const teacherIdx = headers.findIndex(h => /teacher|instructor/i.test(h));
+        const styleIdx = headers.findIndex(h => /style|type/i.test(h));
+
+        rows.forEach(row => {
+            const date = row[dateIdx] || '';
+            const title = row[titleIdx] || '';
+            const teacher = row[teacherIdx] || '';
+            const style = row[styleIdx] || '';
+
+            const tr = document.createElement('tr');
+
+            const dateCell = document.createElement('td');
+            dateCell.textContent = date;
+            tr.appendChild(dateCell);
+
+            const infoCell = document.createElement('td');
+            if (SKIPPED.some(s => date.includes(s))) {
+                infoCell.innerHTML = '<span class="no-class">No class</span>';
+            } else {
+                let html = `<div class="class-title">${escapeHtml(title || 'TBA')}</div>`;
+                if (teacher) html += `<div class="class-teacher">${escapeHtml(teacher)}</div>`;
+                if (style) html += `<span class="badge">${escapeHtml(style)}</span>`;
+                infoCell.innerHTML = html;
+            }
+            tr.appendChild(infoCell);
+
+            tbody.appendChild(tr);
+        });
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('schedule').style.display = 'block';
+    }
+
+    function showError(msg) {
+        document.getElementById('loading').style.display = 'none';
+        const errorDiv = document.getElementById('error');
+        errorDiv.textContent = msg;
+        errorDiv.style.display = 'block';
+    }
+
+    function escapeHtml(str) {
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+    }
+
+    loadSchedule();
+</script>
+
+</body>
+</html>
