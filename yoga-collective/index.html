@@ -40,6 +40,8 @@
         details[open] summary::after { content: '−'; }
         .faq-body { padding-bottom: 1.25rem; font-size: 0.875rem; color: var(--muted); line-height: 1.8; }
         .faq-body a { color: var(--green); }
+        ul.faq-body { padding-left: 1.25rem; }
+        ul.faq-body li { margin-bottom: 0.4rem; }
 
         @media (max-width: 600px) {
             main { padding: 3rem 1.25rem; }
@@ -103,7 +105,17 @@
 
         <details>
             <summary>How can I respect the space?</summary>
-            <div class="faq-body">Arrive 10 minutes early — the door locks 2 minutes after class begins. Remove shoes at the entrance. Silence your phone and fitness watch. During class, listen to your body and rest as needed.</div>
+            <div >
+            <ul class="faq-body">
+                <li>Arrive 10 minutes early — the door locks 2 minutes after class begins. </li>
+                <li>If you arrive early, quiet conversations are welcome. </li>
+                <li>We’ll begin class on time, so we invite you to settle in a few minutes before we start.</li>
+                <li>Shoes can be left at the entrance before entering the space.</li>
+                <li>Please silence your phone and fitness watch, or leave them in your bag.</li>
+                <li>Listen to your body. If you feel overwhelmed or need rest, you’re always welcome to lie down on your mat.</li>
+                <li>If you need to step out, that’s okay. We just ask that you move in and out of the space quietly.</li>
+            </ul>
+            </div>
         </details>
 
         <details>
