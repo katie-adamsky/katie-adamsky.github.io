@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Collective Flier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: white;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+        }
+        
+        .flier {
+            background: white;
+            border: 2px solid var(--color-border-tertiary);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        
+        .header {
+            margin-bottom: 2.5rem;
+        }
+        
+        h1 {
+            font-size: 42px;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+            color: var(--color-text-primary);
+        }
+        
+        .tagline {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        
+        .highlight-box {
+            background: var(--color-background-secondary);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--color-text-primary);
+        }
+        
+        .time-location {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-block h3 {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-block p {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+        
+        .cost {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .details {
+            background: var(--color-background-secondary);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 2.5rem;
+            text-align: left;
+        }
+        
+        .details h3 {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .detail-item {
+            margin-bottom: 0.75rem;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .detail-item strong {
+            font-weight: 500;
+        }
+        
+        .cta-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--color-text-primary);
+            color: var(--color-background-primary);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius-lg);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: opacity 0.2s;
+            margin: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            opacity: 0.85;
+        }
+        
+        .exceptions {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-style: italic;
+            margin-top: 1.5rem;
+        }
+        
+        .footer {
+            border-top: 1px solid var(--color-border-tertiary);
+            padding-top: 1.5rem;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+        
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer strong {
+            display: block;
+            color: var(--color-text-primary);
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 480px) {
+            .time-location {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .flier {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flier">
+        <div class="header">
+            <h1>Yoga Collective</h1>
+            <p class="tagline">Community yoga on Sunday mornings</p>
+        </div>
+        
+        <div class="highlight-box">
+            <div class="time-location">
+                <div class="info-block">
+                    <h3>When</h3>
+                    <p>10–11 AM</p>
+                    <p style="font-size: 14px; font-weight: 400; margin-top: 0.25rem;">Summer Sundays</p>
+                    <p style="font-size: 14px; font-weight: 400; margin-top: 0.25rem;">May 3 – August 30, 2026 </p>
+                    <p style="font-size: 8px; font-weight: 400; margin-top: 0.25rem;"> No class on 5/10, 5/24, and 7/5 </p>
+                </div>
+                <div class="info-block">
+                    <h3>Where</h3>
+                    <p>Whim W'him</p>
+                    <p style="font-size: 14px; font-weight: 400; margin-top: 0.25rem;">Queen Anne, Seattle</p>
+                    <p style="font-size: 10px; font-weight: 400; margin-top: 0.25rem;"> 1716 2nd Ave N, Seattle, WA 98109 </p>
+                </div>
+            </div>
+            <div class="time-location">
+                <div class="info-block">
+                    <h3>Who We Are</h3>
+                    <p>Synergy Yoga Teacher Training Graduates</p>
+                    <p style="font-size: 10px; font-weight: 400; margin-top: 0.25rem;">We are a collective of newly graduated yoga teachers, excited to share what we've learned and practice teaching!</p>
+                    <p style="font-size: 10px; font-weight: 400; margin-top: 0.25rem;">  </p>
+                </div>
+                <div class="info-block">
+                    <h3>Cost</h3>
+                    <p>Pay what you can</p>
+                    <p style="font-size: 14px; font-weight: 400; margin-top: 0.25rem;">Suggested Donation $10–$25</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="details">
+            <h3>Getting started</h3>
+            <div class="detail-item">
+                <strong>Sign up:</strong> bit.ly/4mHmdBN (takes 5 min)
+            </div>
+            <div class="detail-item">
+                <strong>Complete waiver:</strong> Before first class
+            </div>
+            <div class="detail-item">
+                <strong>Bring:</strong> Mat, water bottle, yourself
+            </div>
+            <div class="detail-item">
+                <strong>Arrive:</strong> 10 minutes early
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <button class="cta-button" onclick="window.open('https://bit.ly/4mHmdBN', '_blank')">Sign Up for a Class</button>
+            <button class="cta-button" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSdd7mQVc4kdcNTpbIZm70uKDM04fooE9oBVe6XLmwaR-eU3sw/viewform?usp=dialog', '_blank')">Fill Out Waiver</button>
+        </div>
+        
+        <div class="footer">
+            <p><strong>yoga-collective.com</strong></p>
+        </div>
+    </div>
+</body>
+</html>
