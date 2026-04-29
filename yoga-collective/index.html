@@ -17,16 +17,17 @@
 
         .btn-group { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
 
-        .steps { padding: 4rem 0; border-bottom: 1px solid var(--border); }
         .section-label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 2.5rem; }
-        .step { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; margin-bottom: 2.5rem; }
-        .step:last-child { margin-bottom: 0; }
-        .step-number { font-size: 0.6875rem; font-weight: 600; color: var(--muted); padding-top: 0.2rem; letter-spacing: 0.04em; }
-        .step h3 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .step p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
-        .step a { color: var(--text); }
-        .info-block { background: var(--bg-alt); padding: 0.875rem 1rem; margin-top: 0.75rem; font-size: 0.8125rem; color: var(--muted); line-height: 1.7; }
-        .info-block a { color: var(--text); }
+
+        .about { padding: 2rem 0; }
+        .about p { font-size: 0.9375rem; line-height: 1.85; color: var(--muted); }
+
+        .key-info { padding: 2rem 0; }
+        .info-row { display: flex; gap: 2rem; padding: 0.875rem 0; }
+        .info-label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); width: 3.5rem; flex-shrink: 0; padding-top: 0.15rem; }
+        .info-value { font-size: 0.875rem; line-height: 1.7; }
+        .info-value a { color: var(--text); }
+        .info-note { display: block; font-size: 0.8125rem; color: var(--muted); margin-top: 0.15rem; }
 
         .faq { padding: 4rem 0; border-bottom: 1px solid var(--border); }
         details { border-bottom: 1px solid var(--border); }
@@ -58,10 +59,30 @@
     <section class="hero">
         <h1>Yoga Collective</h1>
         <p class="tagline">Community yoga on Sunday mornings</p>
-        <p class="meta">May 3 – August 30, 2026 &nbsp;·&nbsp; 10–11 AM &nbsp;·&nbsp; Queen Anne, Seattle</p>
+        <p class="meta">Queen Anne, Seattle &nbsp;·&nbsp; May – August 2026</p>
         <div class="btn-group">
             <a href="signup.html" class="btn btn-primary">Sign Up for a Class</a>
             <a href="schedule.html" class="btn btn-secondary">View Schedule</a>
+        </div>
+    </section>
+
+    <section class="about">
+        <p>We're a collective of newly trained yoga teachers sharing our practice with the Seattle community. 
+            Classes are open to all levels and offered on a pay-what-you-can basis — come as you are.</p>
+    </section>
+
+    <section class="key-info">
+        <div class="info-row">
+            <span class="info-label">When</span>
+            <span class="info-value">Sundays 10–11 AM · May 3 – August 30, 2026<span class="info-note">No class May 10, May 24, or July 5</span></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Where</span>
+            <span class="info-value">Whim W'him Contemporary Dance Center<span class="info-note">1716 2nd Ave N, Queen Anne, Seattle &nbsp;<a href="https://maps.google.com/?q=1716+2nd+Ave+N,+Seattle,+WA+98109" target="_blank">Get directions →</a></span></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Cost</span>
+            <span class="info-value">Pay what you can<span class="info-note">Suggested $10–$25 · Venmo or Zelle accepted</span></span>
         </div>
     </section>
 
@@ -69,18 +90,11 @@
         <p class="section-label">Frequently asked questions</p>
 
         <details>
-            <summary>When is it?</summary>
-            <div class="faq-body">Classes run 10–11 AM every Sunday from May 3 through August 30, 2026. No class on May 10, May 24, or July 5. Doors open 10 minutes before class starts.</div>
-        </details>
-
-        <details>
-            <summary>Where is it?</summary>
-            <div class="faq-body">Whim W'him Contemporary Dance Center, 1716 2nd Ave N, Seattle, WA 98109 (Queen Anne). <a href="https://maps.google.com/?q=1716+2nd+Ave+N,+Seattle,+WA+98109" target="_blank">Get directions →</a></div>
-        </details>
-
-        <details>
             <summary>Who is teaching?</summary>
-            <div class="faq-body">We are a collective of newly graduated teachers from Synergy Yoga Teacher Training, excited to share what we've learned. Specific instructor details are revealed when you sign up for individual classes.</div>
+            <div class="faq-body">We are a collective of newly graduated teachers from <a href="https://synergyyogaschool.com/" 
+                +target="_blank">Synergy Yoga Teacher Training</a>, excited to share what we've learned. 
+                To see who is teaching a specific class, check out our <a href="schedule.html">Schedule</a>.
+            </div>  
         </details>
 
         <details>
@@ -96,11 +110,6 @@
         <details>
             <summary>What is parking like?</summary>
             <div class="faq-body">Pretty easy. There's a parking lot next to the adjacent church, plus additional street parking nearby.</div>
-        </details>
-
-        <details>
-            <summary>How much does it cost?</summary>
-            <div class="faq-body">Pay what you can — give more if you're able, less if you need. Suggested donation is $10–$25. We accept Venmo (@cityyogacollective) and Zelle (Monique Thakkar | cityyogacollective@gmail.com).</div>
         </details>
 
         <details>
