@@ -24,11 +24,14 @@
         .schedule-table td:last-child { text-align: right; vertical-align: middle; }
         .btn-sm { padding: 0.4rem 0.875rem; font-size: 0.75rem; }
 
+        .mobile-time { display: none; }
+
         @media (max-width: 600px) {
             main { padding: 2.5rem 1.25rem 4rem; }
             .schedule-table td:first-child { width: 120px; }
-            .schedule-table th:last-child,
-            .schedule-table td:last-child { display: none; }
+            .schedule-table th:nth-child(2),
+            .schedule-table td:nth-child(2) { display: none; }
+            .mobile-time { display: block; font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
         }
     </style>
 </head>
@@ -125,7 +128,7 @@
             const tr = document.createElement('tr');
 
             const dateCell = document.createElement('td');
-            dateCell.textContent = date;
+            dateCell.innerHTML = `${escapeHtml(date)}<div class="mobile-time">${escapeHtml(time)}</div>`;
             tr.appendChild(dateCell);
 
             const timeCell = document.createElement('td');
