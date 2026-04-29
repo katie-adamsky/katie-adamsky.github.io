@@ -191,7 +191,12 @@
     <div id="error" class="state-box" style="display:none;"></div>
     <div id="schedule" style="display:none;">
         <table class="schedule-table">
-            <thead id="schedule-head"></thead>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Class</th>
+                </tr>
+            </thead>
             <tbody id="schedule-body"></tbody>
         </table>
     </div>
@@ -236,24 +241,33 @@
     function renderSchedule(values) {
         const headers = values[0];
         const rows = values.slice(1);
-
-        const thead = document.getElementById('schedule-head');
-        const headerRow = document.createElement('tr');
-        headers.forEach(h => {
-            const th = document.createElement('th');
-            th.textContent = h;
-            headerRow.appendChild(th);
-        });
-        thead.appendChild(headerRow);
-
         const tbody = document.getElementById('schedule-body');
+
+        const dateIdx = headers.findIndex(h => /date/i.test(h));
+        const titleIdx = headers.findIndex(h => /type/i.test(h));
+        const teacherIdx = headers.findIndex(h => /teacher|instructor/i.test(h));
+
         rows.forEach(row => {
+            const date = row[dateIdx] || '';
+            const title = row[titleIdx] || '';
+            const teacher = row[teacherIdx] || '';
+
             const tr = document.createElement('tr');
-            headers.forEach((_, i) => {
-                const td = document.createElement('td');
-                td.textContent = row[i] || '';
-                tr.appendChild(td);
-            });
+
+            const dateCell = document.createElement('td');
+            dateCell.textContent = date;
+            tr.appendChild(dateCell);
+
+            const infoCell = document.createElement('td');
+            if (SKIPPED.some(s => date.includes(s))) {
+                infoCell.innerHTML = '<span class="no-class">No class</span>';
+            } else {
+                let html = title ? `<div class="class-title">${escapeHtml(title)}</div>` : '';
+                if (teacher) html += `<div class="class-teacher">${escapeHtml(teacher)}</div>`;
+                infoCell.innerHTML = html;
+            }
+            tr.appendChild(infoCell);
+
             tbody.appendChild(tr);
         });
 
