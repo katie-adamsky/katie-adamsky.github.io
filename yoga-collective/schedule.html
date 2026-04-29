@@ -6,166 +6,22 @@
     <title>Schedule – Yoga Collective</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --bg: #FAFAFA;
-            --bg-alt: #F0F0F0;
-            --border: #DCDCDC;
-            --text: #1C1C1C;
-            --muted: #6B6B6B;
-            --black: #1C1C1C;
-        }
+        main { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 5rem; }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.25rem 2rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-logo {
-            font-size: 0.875rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: var(--text);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.8125rem;
-            text-decoration: none;
-            color: var(--text);
-            letter-spacing: 0.04em;
-        }
-
-        .nav-links a:hover { text-decoration: underline; }
-
-        main {
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 4rem 2rem 5rem;
-        }
-
-        .page-header {
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .page-header h1 {
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: -0.01em;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-header p {
-            font-size: 0.875rem;
-            color: var(--muted);
-        }
-
-        /* Schedule table */
-        .schedule-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .schedule-table th {
-            font-size: 0.6875rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--muted);
-            text-align: left;
-            padding: 0 0 0.875rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .schedule-table td {
-            padding: 1rem 0;
-            font-size: 0.9rem;
-            border-bottom: 1px solid var(--border);
-            vertical-align: top;
-        }
-
+        .schedule-table { width: 100%; border-collapse: collapse; }
+        .schedule-table th { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 0 0.875rem; border-bottom: 1px solid var(--border); }
+        .schedule-table td { padding: 1rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
         .schedule-table td:first-child { color: var(--muted); width: 160px; }
 
         .class-title { font-weight: 500; margin-bottom: 0.2rem; }
         .class-teacher { font-size: 0.8125rem; color: var(--muted); }
-
-        .badge {
-            display: inline-block;
-            font-size: 0.6875rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 0.2rem 0.5rem;
-            background: var(--bg-alt);
-            color: var(--muted);
-            margin-top: 0.25rem;
-        }
-
         .no-class { color: var(--muted); font-style: italic; }
-
-        /* Loading/error states */
-        .state-box {
-            padding: 3rem 0;
-            text-align: center;
-            color: var(--muted);
-            font-size: 0.875rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.75rem;
-            font-family: inherit;
-            font-size: 0.8125rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            text-decoration: none;
-            cursor: pointer;
-            border: 1px solid var(--black);
-            transition: background 0.15s, color 0.15s;
-            margin-top: 2.5rem;
-        }
-
-        .btn-primary { background: var(--black); color: #fff; }
-        .btn-primary:hover { background: #333; border-color: #333; }
-
-        footer {
-            padding: 3rem 2rem;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-        }
-
-        footer p { margin-bottom: 0.35rem; }
-        footer a { color: var(--text); text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
-        .footer-mission { margin-top: 1.25rem; font-style: italic; color: #aaa; }
+        .state-box { padding: 3rem 0; text-align: center; color: var(--muted); font-size: 0.875rem; }
+        .btn { margin-top: 2.5rem; }
 
         @media (max-width: 600px) {
-            nav { padding: 1rem 1.25rem; }
             main { padding: 2.5rem 1.25rem 4rem; }
             .schedule-table td:first-child { width: 120px; }
         }

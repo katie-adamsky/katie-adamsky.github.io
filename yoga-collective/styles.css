@@ -1,0 +1,108 @@
+:root {
+    --bg: #FAFAFA;
+    --bg-alt: #F0F0F0;
+    --border: #DCDCDC;
+    --text: #1C1C1C;
+    --muted: #6B6B6B;
+    --black: #1C1C1C;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Nav */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    font-size: 0.8125rem;
+    text-decoration: none;
+    color: var(--text);
+    letter-spacing: 0.04em;
+}
+
+.nav-links a:hover { text-decoration: underline; }
+
+/* Page header (schedule, signup) */
+.page-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    font-size: 0.875rem;
+    color: var(--muted);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--black);
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn-primary { background: var(--black); color: #fff; }
+.btn-primary:hover { background: #333; border-color: #333; }
+.btn-secondary { background: transparent; color: var(--black); }
+.btn-secondary:hover { background: var(--bg-alt); }
+
+/* Footer */
+footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+}
+
+footer p { margin-bottom: 0.35rem; }
+footer a { color: var(--text); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+.footer-mission { margin-top: 1.25rem; font-style: italic; color: #aaa; }
+
+@media (max-width: 600px) {
+    nav { padding: 1rem 1.25rem; }
+}
