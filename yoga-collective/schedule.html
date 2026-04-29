@@ -21,7 +21,8 @@
         .class-description { font-size: 0.8125rem; color: var(--muted); }
         .no-class { color: var(--muted); font-style: italic; }
         .state-box { padding: 3rem 0; text-align: center; color: var(--muted); font-size: 0.875rem; }
-        .btn { margin-top: 2.5rem; }
+        .schedule-table td:last-child { text-align: right; vertical-align: middle; }
+        .btn-sm { padding: 0.4rem 0.875rem; font-size: 0.75rem; }
 
         @media (max-width: 600px) {
             main { padding: 2.5rem 1.25rem 4rem; }
@@ -54,13 +55,14 @@
                     <th>Date</th>
                     <th>Time</th>
                     <th>Class</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="schedule-body"></tbody>
         </table>
     </div>
 
-    <div style="text-align:center;">
+    <div style="text-align:center; margin-top: 2.5rem;">
         <a href="signup.html" class="btn btn-primary">Sign Up for a Class</a>
     </div>
 </main>
@@ -77,6 +79,7 @@
     const API_KEY = 'AIzaSyBRVe6tRJpeag_gL0OuS53BS7nrVrU_hFA';
 
     const SKIPPED = ['May 10', 'May 24', 'July 5'];
+    const SIGNUP_URL = 'https://bit.ly/4mHmdBN';
 
     async function loadSchedule() {
         const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(SHEET_TAB)}?key=${API_KEY}`;
@@ -123,8 +126,10 @@
             timeCell.textContent = time;
             tr.appendChild(timeCell);
 
+            const skipped = SKIPPED.some(s => date.includes(s));
+
             const infoCell = document.createElement('td');
-            if (SKIPPED.some(s => date.includes(s))) {
+            if (skipped) {
                 infoCell.innerHTML = '<span class="no-class">No class</span>';
             } else {
                 let html = teacher ? `<div class="class-teacher">${escapeHtml(teacher)}</div>` : '';
@@ -132,6 +137,12 @@
                 infoCell.innerHTML = html;
             }
             tr.appendChild(infoCell);
+
+            const signupCell = document.createElement('td');
+            if (!skipped) {
+                signupCell.innerHTML = `<a href="${SIGNUP_URL}" target="_blank" class="btn btn-primary btn-sm">Sign Up</a>`;
+            }
+            tr.appendChild(signupCell);
 
             tbody.appendChild(tr);
         });
