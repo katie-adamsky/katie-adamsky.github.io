@@ -194,6 +194,7 @@
             <thead>
                 <tr>
                     <th>Date</th>
+                    <th>Time</th>
                     <th>Class</th>
                 </tr>
             </thead>
@@ -257,8 +258,12 @@
             const tr = document.createElement('tr');
 
             const dateCell = document.createElement('td');
-            dateCell.innerHTML = `${escapeHtml(date)}${time ? `<div class="class-teacher">${escapeHtml(time)}</div>` : ''}`;
+            dateCell.textContent = date;
             tr.appendChild(dateCell);
+
+            const timeCell = document.createElement('td');
+            timeCell.textContent = time;
+            tr.appendChild(timeCell);
 
             const infoCell = document.createElement('td');
             if (SKIPPED.some(s => date.includes(s))) {
