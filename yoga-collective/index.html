@@ -8,12 +8,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        main { max-width: 680px; margin: 0 auto; padding: 5rem 2rem; }
+        main { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem 5rem; }
 
-        .hero { text-align: center; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }
-        .hero h1 { font-size: clamp(3.5rem, 8vw, 4rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
-        .hero .tagline { font-size: 1.5rem; color: var(--muted); margin-bottom: 0.375rem; }
-        .hero .meta { font-size: 0.875rem; color: var(--muted); margin-bottom: 2.5rem; }
+        /* Hero */
+        .hero { background: var(--green); padding: 4rem 2rem 3.5rem; text-align: center; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.75rem; color: #fff; }
+        .hero .tagline { font-size: 1.25rem; font-weight: 300; color: rgba(255,255,255,0.85); margin-bottom: 0.375rem; }
+        .hero .meta { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-bottom: 2rem; }
+        .hero .btn-primary { background: #fff; color: var(--green); border-color: #fff; }
+        .hero .btn-primary:hover { background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.9); }
+        .hero .btn-secondary { background: transparent; color: #fff; border-color: rgba(255,255,255,0.65); }
+        .hero .btn-secondary:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+
+        /* Photo + info grid */
+        .content-photo-grid { display: grid; grid-template-columns: 1fr 500px; gap: 2.5rem; align-items: start; }
+        .group-photo { width: 500px; height: 500px; object-fit: cover; display: block; }
 
         .btn-group { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
 
@@ -43,8 +52,14 @@
         ul.faq-body { padding-left: 1.25rem; }
         ul.faq-body li { margin-bottom: 0.4rem; }
 
+        @media (max-width: 860px) {
+            .content-photo-grid { grid-template-columns: 1fr; }
+            .group-photo { width: 100%; height: auto; aspect-ratio: 1; order: -1; }
+        }
+
         @media (max-width: 600px) {
-            main { padding: 3rem 1.25rem; }
+            main { padding: 2rem 1.25rem 4rem; }
+            .hero { padding: 3rem 1.25rem 2.5rem; }
             .hero h1 { font-size: 2.25rem; }
         }
     </style>
@@ -55,44 +70,50 @@
     <a href="index.html" class="nav-logo">Yoga Collective</a>
     <ul class="nav-links">
         <li><a href="schedule.html">Schedule</a></li>
-        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="howtojoin.html">How to Join</a></li>
         <li><a href="studio.html">The Space</a></li>
     </ul>
 </nav>
 
+<section class="hero">
+    <h1>Yoga Collective</h1>
+    <h2 class="tagline">Community yoga in Seattle</h2>
+    <p class="meta">Sunday mornings &nbsp;·&nbsp; May - August 2026 &nbsp;·&nbsp; Queen Anne, Seattle</p>
+    <div class="btn-group">
+        <a href="signup.html" class="btn btn-primary">Sign Up for a Class</a>
+        <a href="schedule.html" class="btn btn-secondary">View Schedule</a>
+    </div>
+</section>
+
 <main>
-    <section class="hero">
-        <h1>Yoga Collective</h1>
-        <h2 class="tagline">Community yoga in Seattle</h2>
-        <p class="meta">Sunday mornings &nbsp;·&nbsp; May - August 2026 &nbsp;·&nbsp; Queen Anne, Seattle </p>
-        <div class="btn-group">
-            <a href="signup.html" class="btn btn-primary">Sign Up for a Class</a>
-            <a href="schedule.html" class="btn btn-secondary">View Schedule</a>
-        </div>
-    </section>
 
-    <section class="about">
-        <p>We're a collective of newly trained yoga teachers sharing our practice with the Seattle community. 
-            Classes are open to all levels and offered on a pay-what-you-can basis - come as you are.</p>
-    </section>
+    <div class="content-photo-grid">
+        <div>
+            <section class="about">
+                <p>We're a collective of newly trained yoga teachers sharing our practice with the Seattle community.
+                    Classes are open to all levels and offered on a pay-what-you-can basis - come as you are.</p>
+            </section>
 
-    <section class="key-info">
-        <div class="info-row">
-            <span class="info-label">When</span>
-            <span class="info-value">Sundays 10–11 AM · May 3 – August 30, 2026<span class="info-note">No class May 10, May 24, or July 5</span></span>
+            <section class="key-info">
+                <div class="info-row">
+                    <span class="info-label">When</span>
+                    <span class="info-value">Sundays 10–11 AM · May 3 – August 30, 2026<span class="info-note">No class May 10, May 24, or July 5</span></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Where</span>
+                    <span class="info-value">Whim W'him Contemporary Dance Center<span class="info-note">1716 2nd Ave N, Queen Anne, Seattle &nbsp;<a href="https://maps.google.com/?q=1716+2nd+Ave+N,+Seattle,+WA+98109" target="_blank">Get directions →</a> &nbsp;·&nbsp; <a href="studio.html">About the space →</a></span></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Cost</span>
+                    <span class="info-value">Pay what you can
+                        <span class="info-note">Suggested $10–$25 · Venmo or Zelle accepted </span>
+                        <span class="info-note">Donations help with rental and website fees so that we can continue providing this service.</span>
+                    </span>
+                </div>
+            </section>
         </div>
-        <div class="info-row">
-            <span class="info-label">Where</span>
-            <span class="info-value">Whim W'him Contemporary Dance Center<span class="info-note">1716 2nd Ave N, Queen Anne, Seattle &nbsp;<a href="https://maps.google.com/?q=1716+2nd+Ave+N,+Seattle,+WA+98109" target="_blank">Get directions →</a> &nbsp;·&nbsp; <a href="studio.html">About the space →</a></span></span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Cost</span>
-            <span class="info-value">Pay what you can
-                <span class="info-note">Suggested $10–$25 · Venmo or Zelle accepted </span>
-                <span class="info-note">Donations help with rental and website fees so that we can continue providing this service.</span>
-            </span>
-        </div>
-    </section>
+        <img class="group-photo" src="images/group.webp" alt="Yoga Collective teachers">
+    </div>
 
     <section class="faq">
         <h2 class="tagline">Frequently Asked Questions</h2>

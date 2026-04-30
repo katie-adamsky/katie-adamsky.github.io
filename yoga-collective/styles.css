@@ -37,8 +37,8 @@ nav {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
-    color: #fff;
-    background: var(--green);
+    color: var(--text);
+    background: var(--bg);
 }
 
 .nav-links {
