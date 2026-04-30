@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule – Yoga Collective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        main { max-width: 760px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+        .schedule-table { width: 100%; border-collapse: collapse; }
+        .schedule-table th { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 1.5rem 0.875rem 0; border-bottom: 1px solid var(--border); }
+        .schedule-table td { padding: 1rem 1.5rem 1rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        .schedule-table th:last-child, .schedule-table td:last-child { padding-right: 0; }
+        .schedule-table td:first-child { font-weight: 500; width: 110px; }
+        .schedule-table td:nth-child(2) { color: var(--muted); width: 90px; }
+
+        .teacher-cell { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
+        .teacher-avatar { width: 45px; height: 45px; border-radius: 50%; background: var(--bg-alt); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1rem; line-height: 1; }
+        .class-description { font-size: 0.875rem; color: var(--muted); }
+        .no-class { color: var(--muted); font-style: italic; }
+        .state-box { padding: 3rem 0; text-align: center; color: var(--muted); font-size: 0.875rem; }
+        .schedule-table td:last-child { text-align: right; vertical-align: middle; }
+        .btn-sm { padding: 0.4rem 0.875rem; font-size: 0.75rem; white-space: nowrap;}
+
+        .mobile-time { display: none; }
+        .mobile-class { display: none; }
+
+        @media (max-width: 600px) {
+            main { padding: 2.5rem 1.25rem 4rem; }
+            .schedule-table td:first-child { width: 100px; }
+            .schedule-table th:nth-child(2),
+            .schedule-table td:nth-child(2) { display: none; }
+            .schedule-table th:nth-child(4),
+            .schedule-table td:nth-child(4) { display: none; }
+            .mobile-time { display: block; font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+            .mobile-class { display: block; font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+            .btn-sm { padding: 0.4rem 0.5rem; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">Yoga Collective</a>
+    <ul class="nav-links">
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="howtojoin.html">How to Join</a></li>
+        <li><a href="studio.html">The Space</a></li>
+    </ul>
+</nav>
+
+<div class="page-header">
+    <h1>Summer Schedule</h1>
+    <p>Most Sunday mornings &nbsp;·&nbsp; May – August 2026</p>
+</div>
+
+<main>
+
+    <div id="loading" class="state-box">Loading schedule…</div>
+    <div id="error" class="state-box" style="display:none;"></div>
+    <div id="schedule" style="display:none;">
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Teacher</th>
+                    <th>Class</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="schedule-body"></tbody>
+        </table>
+    </div>
+
+</main>
+
+<footer>
+    <p>Whim W'him Contemporary Dance Center &nbsp;·&nbsp; 1716 2nd Ave N, Seattle, WA 98109</p>
+    <p><a href="mailto:cityyogacollective@gmail.com">cityyogacollective@gmail.com</a></p>
+    <p class="footer-mission">An inclusive space to move between effort and ease with presence, curiosity, and care.</p>
+</footer>
+
+<script>
+    const SHEET_ID = '1vn7qWyH6ow8I9Ndv-n9Rt_gRc5yt9JlbZRd-4L9TUdU';
+    const SHEET_TAB = 'Sheet1';
+    const API_KEY = 'AIzaSyBRVe6tRJpeag_gL0OuS53BS7nrVrU_hFA';
+
+    const SKIPPED = ['May 10', 'May 24', 'July 5'];
+    const SIGNUP_URL = 'https://www.signupgenius.com/go/10C044AACAF22A4F5CE9-63643606-yoga#/';
+
+    const EMOJI_POOL = [
+        '🌞', '🌳', '🐦', '🦉', '🐸', '🦎', '🦅', '🦁', '🐦‍⬛', '🐝', '🦋', '🐈', '🪽', '🪷',
+        '🌸', '🌻', '🌈', '🍒', '⛰️', '🌱', '🌀', '🌿'
+    ];
+
+    const emojiStart = Math.floor(Math.random() * EMOJI_POOL.length);
+    const teacherEmojiMap = new Map();
+    function emojiFor(name) {
+        if (!teacherEmojiMap.has(name)) {
+            teacherEmojiMap.set(name, EMOJI_POOL[(emojiStart + teacherEmojiMap.size) % EMOJI_POOL.length]);
+        }
+        return teacherEmojiMap.get(name);
+    }
+
+    async function loadSchedule() {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(SHEET_TAB)}?key=${API_KEY}`;
+
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`API error ${res.status}`);
+            const data = await res.json();
+
+            if (!data.values || data.values.length < 2) {
+                showError('No schedule data available yet. Check back soon.');
+                return;
+            }
+
+            renderSchedule(data.values);
+        } catch (err) {
+            showError('Unable to load schedule. Please try again later or email cityyogacollective@gmail.com.');
+        }
+    }
+
+    function renderSchedule(values) {
+        const headers = values[0];
+        const rows = values.slice(1);
+        const tbody = document.getElementById('schedule-body');
+
+        const dateIdx = headers.findIndex(h => /date/i.test(h));
+        const timeIdx = headers.findIndex(h => /time/i.test(h));
+        const titleIdx = headers.findIndex(h => /type/i.test(h));
+        const teacherIdx = headers.findIndex(h => /teacher|instructor/i.test(h));
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        rows.forEach(row => {
+            const date = row[dateIdx] || '';
+            const time = row[timeIdx] || '';
+            const title = row[titleIdx] || '';
+            const teacher = row[teacherIdx] || '';
+
+            const withYear = /\d{4}/.test(date) ? date : `${date}, 2026`;
+            if (new Date(withYear) < today) return;
+
+            const tr = document.createElement('tr');
+
+            const dateCell = document.createElement('td');
+            dateCell.innerHTML = `${escapeHtml(date)}<div class="mobile-time">${escapeHtml(time)}</div>`;
+            tr.appendChild(dateCell);
+
+            const timeCell = document.createElement('td');
+            timeCell.textContent = time;
+            tr.appendChild(timeCell);
+
+            const skipped = SKIPPED.some(s => date.includes(s));
+
+            const teacherCell = document.createElement('td');
+            if (skipped) {
+                teacherCell.innerHTML = '<span class="no-class">No class</span>';
+            } else {
+                const emoji = teacher ? emojiFor(teacher) : '👤';
+                const nameHtml = teacher ? escapeHtml(teacher) : '<span class="no-class" style="font-size:0.75rem">TBD</span>';
+                const mobileClassHtml = title ? `<div class="mobile-class">${escapeHtml(title)}</div>` : '';
+                teacherCell.innerHTML = `<div class="teacher-cell"><span class="teacher-avatar">${emoji}</span><div>${nameHtml}${mobileClassHtml}</div></div>`;
+            }
+            tr.appendChild(teacherCell);
+
+            const classCell = document.createElement('td');
+            if (!skipped && title) {
+                classCell.innerHTML = `<span class="class-description">${escapeHtml(title)}</span>`;
+            }
+            tr.appendChild(classCell);
+
+            const signupCell = document.createElement('td');
+            if (!skipped) {
+                signupCell.innerHTML = `<a href="${SIGNUP_URL}" target="_blank" class="btn btn-primary btn-sm">Sign Up</a>`;
+            }
+            tr.appendChild(signupCell);
+
+            tbody.appendChild(tr);
+        });
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('schedule').style.display = 'block';
+    }
+
+    function showError(msg) {
+        document.getElementById('loading').style.display = 'none';
+        const errorDiv = document.getElementById('error');
+        errorDiv.textContent = msg;
+        errorDiv.style.display = 'block';
+    }
+
+    function escapeHtml(str) {
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+    }
+
+    loadSchedule();
+</script>
+
+</body>
+</html>

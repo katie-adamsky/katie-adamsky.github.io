@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Join - Yoga Collective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        main { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+        .section-label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 2.5rem; }
+
+        .step { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+        .step:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .step-image { width: 10rem; height: 10rem; object-fit: cover; margin-top: 0.25rem; }
+        .step h3 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .step p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+
+        .donation-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 0 0 1rem; }
+        .tier { padding: 0.875rem 0.5rem; border: 1px solid var(--border); text-align: center; background: #fff; }
+        .tier-amount { font-size: 1.125rem; font-weight: 500; display: block; }
+        .tier-name { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; display: block; letter-spacing: 0.04em; }
+
+        .payment-row { display: flex; gap: 0.75rem; }
+        .payment-block { flex: 1; background: var(--bg-alt); padding: 0.75rem 1rem; font-size: 0.8125rem; }
+        .payment-block strong { display: block; font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+        .payment-block a { color: var(--text); text-decoration: none; font-weight: 500; }
+        .payment-block a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            main { padding: 2.5rem 1.25rem 4rem; }
+            .step { grid-template-columns: 1fr; }
+            .step-image { width: 100%; height: auto; aspect-ratio: 1; margin: 0; }
+            .payment-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">Yoga Collective</a>
+    <ul class="nav-links">
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="howtojoin.html">How to Join</a></li>
+        <li><a href="studio.html">The Space</a></li>
+    </ul>
+</nav>
+
+<div class="page-header">
+    <h1>How to Join</h1>
+    <p>All levels welcome &nbsp;·&nbsp; Pay what you can</p>
+</div>
+
+<main>
+
+    <div class="step">
+        <img class="step-image" src="images/seed.webp" alt="">
+        <div>
+            <h3>Sign up for a class</h3>
+            <p>Class sizes are intentionally limited. Browse the schedule and reserve your spot in advance.</p>
+            <a href="schedule.html" class="btn btn-primary">View Schedule</a>
+        </div>
+    </div>
+
+    <div class="step">
+        <img class="step-image" src="images/flower.webp" alt="">
+        <div>
+            <h3>Complete the waiver</h3>
+            <p>Required before your first class. Takes 2 minutes - you can complete it in advance or on the day of class.</p>
+            <a href="https://bit.ly/4vOAJMv" target="_blank" class="btn btn-primary">Complete Waiver</a>
+        </div>
+    </div>
+
+    <div class="step">
+        <img class="step-image" src="images/fruit.webp" alt="">
+        <div>
+            <h3>Donate</h3>
+            <p>We operate on a pay-what-you-can basis. Donations cover the cost of renting the studio, maintaining the website,
+                and compensating the teacher.
+                You're welcome to give now, when you arrive, or after class,
+                whatever works for you. Give more if you're able, less if you need. </p>
+            <div class="donation-tiers">
+                <div class="tier">
+                    <span class="tier-amount">$5</span>
+                    <span class="tier-name">Supporter</span>
+                </div>
+                <div class="tier">
+                    <span class="tier-amount">$10</span>
+                    <span class="tier-name">Sustainer (Suggested Donation)</span>
+                </div>
+                <div class="tier">
+                    <span class="tier-amount">$25</span>
+                    <span class="tier-name">Thriving</span>
+                </div>
+            </div>
+            <div class="payment-row">
+                <div class="payment-block">
+                    <strong>Venmo</strong>
+                    <a href="https://venmo.com/cityyogacollective" target="_blank">@cityyogacollective</a>
+                </div>
+                <div class="payment-block">
+                    <strong>Zelle</strong>
+                    Monique Thakkar<br>
+                    <a href="mailto:cityyogacollective@gmail.com">cityyogacollective@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step">
+        <img class="step-image" src="images/trees.webp" alt="">
+        <div>
+            <h3>Attend the class</h3>
+            <p>Arrive 10 minutes early - the door locks 2 minutes after class begins.</p>
+            <p>Bring your mat and water bottle. Blocks are optional, but recommended. Take shoes off before entering studio. </p>
+            <p>Be respectful to self and others to cultivate an inclusive and supportive space. </p>
+            <p>All levels welcome.</p>
+            <a href="studio.html" class="btn btn-primary" style="margin-top: 0.5rem;">About the Space</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>Whim W'him Contemporary Dance Center &nbsp;·&nbsp; 1716 2nd Ave N, Seattle, WA 98109</p>
+    <p><a href="mailto:cityyogacollective@gmail.com">cityyogacollective@gmail.com</a></p>
+    <p class="footer-mission">An inclusive space to move between effort and ease with presence, curiosity, and care.</p>
+</footer>
+
+</body>
+</html>
