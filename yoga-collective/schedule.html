@@ -92,12 +92,16 @@
     const SKIPPED = ['May 10', 'May 24', 'July 5'];
     const SIGNUP_URL = 'https://www.signupgenius.com/go/10C044AACAF22A4F5CE9-63643606-yoga#/';
 
-    const EMOJI_POOL = ['🌿', '🌸', '☀️', '🌊', '🍃', '✨', '🌻', '🌙'];
+    const EMOJI_POOL = [
+        '🌞', '🌳', '🐦', '🦉', '🐸', '🦎', '🦅', '🦁', '🐦‍⬛', '🐝', '🦋', '🐈', '🪽', '🪷',
+        '🌸', '🌻', '🌈', '🍒', '⛰️', '🌱', '🌀', '🌿'
+    ];
 
+    const emojiStart = Math.floor(Math.random() * EMOJI_POOL.length);
     const teacherEmojiMap = new Map();
     function emojiFor(name) {
         if (!teacherEmojiMap.has(name)) {
-            teacherEmojiMap.set(name, EMOJI_POOL[teacherEmojiMap.size % EMOJI_POOL.length]);
+            teacherEmojiMap.set(name, EMOJI_POOL[(emojiStart + teacherEmojiMap.size) % EMOJI_POOL.length]);
         }
         return teacherEmojiMap.get(name);
     }
