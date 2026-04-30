@@ -58,12 +58,11 @@ nav {
 
 .nav-links a:hover { text-decoration: underline; }
 
-/* Page header (schedule, signup) */
+/* Page header (schedule, studio, how to join) */
 .page-header {
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
-    text-align:center;
+    background: var(--green);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
 }
 
 .page-header h1 {
@@ -71,11 +70,12 @@ nav {
     font-weight: 300;
     letter-spacing: -0.01em;
     margin-bottom: 0.5rem;
+    color: #fff;
 }
 
 .page-header p {
     font-size: 0.875rem;
-    color: var(--muted);
+    color: rgba(255,255,255,0.75);
 }
 
 /* Buttons */

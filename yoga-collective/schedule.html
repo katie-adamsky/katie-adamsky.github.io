@@ -8,30 +8,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        main { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+        main { max-width: 760px; margin: 0 auto; padding: 3rem 2rem 5rem; }
 
         .schedule-table { width: 100%; border-collapse: collapse; }
         .schedule-table th { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 1.5rem 0.875rem 0; border-bottom: 1px solid var(--border); }
-        .schedule-table td { padding: 1rem 1.5rem 1rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .schedule-table td { padding: 1rem 1.5rem 1rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
         .schedule-table th:last-child, .schedule-table td:last-child { padding-right: 0; }
         .schedule-table td:first-child { font-weight: 500; width: 110px; }
-        .schedule-table td:nth-child(2) { color: var(--muted); width: 110px; }
+        .schedule-table td:nth-child(2) { color: var(--muted); width: 90px; }
 
-        .class-teacher { font-weight: 500; margin-bottom: 0.2rem; }
-        .class-description { font-size: 0.8125rem; color: var(--muted); }
+        .teacher-cell { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
+        .teacher-avatar { width: 45px; height: 45px; border-radius: 50%; background: var(--bg-alt); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1rem; line-height: 1; }
+        .class-description { font-size: 0.875rem; color: var(--muted); }
         .no-class { color: var(--muted); font-style: italic; }
         .state-box { padding: 3rem 0; text-align: center; color: var(--muted); font-size: 0.875rem; }
         .schedule-table td:last-child { text-align: right; vertical-align: middle; }
-        .btn-sm { padding: 0.4rem 0.875rem; font-size: 0.75rem; }
+        .btn-sm { padding: 0.4rem 0.875rem; font-size: 0.75rem; white-space: nowrap;}
 
         .mobile-time { display: none; }
+        .mobile-class { display: none; }
 
         @media (max-width: 600px) {
             main { padding: 2.5rem 1.25rem 4rem; }
-            .schedule-table td:first-child { width: 120px; }
+            .schedule-table td:first-child { width: 100px; }
             .schedule-table th:nth-child(2),
             .schedule-table td:nth-child(2) { display: none; }
+            .schedule-table th:nth-child(4),
+            .schedule-table td:nth-child(4) { display: none; }
             .mobile-time { display: block; font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+            .mobile-class { display: block; font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
             .btn-sm { padding: 0.4rem 0.5rem; white-space: nowrap; }
         }
     </style>
@@ -47,11 +52,12 @@
     </ul>
 </nav>
 
+<div class="page-header">
+    <h1>Summer Schedule</h1>
+    <p>Most Sunday mornings &nbsp;·&nbsp; May – August 2026</p>
+</div>
+
 <main>
-    <div class="page-header" style="text-align:center;">
-        <h1>Summer Schedule</h1>
-        <p>Most Sunday mornings &nbsp;·&nbsp; May – August 2026</p>
-    </div>
 
     <div id="loading" class="state-box">Loading schedule…</div>
     <div id="error" class="state-box" style="display:none;"></div>
@@ -61,6 +67,7 @@
                 <tr>
                     <th>Date</th>
                     <th>Time</th>
+                    <th>Teacher</th>
                     <th>Class</th>
                     <th></th>
                 </tr>
@@ -84,6 +91,16 @@
 
     const SKIPPED = ['May 10', 'May 24', 'July 5'];
     const SIGNUP_URL = 'https://www.signupgenius.com/go/10C044AACAF22A4F5CE9-63643606-yoga#/';
+
+    const EMOJI_POOL = ['🌿', '🌸', '☀️', '🌊', '🍃', '✨', '🌻', '🌙'];
+
+    const teacherEmojiMap = new Map();
+    function emojiFor(name) {
+        if (!teacherEmojiMap.has(name)) {
+            teacherEmojiMap.set(name, EMOJI_POOL[teacherEmojiMap.size % EMOJI_POOL.length]);
+        }
+        return teacherEmojiMap.get(name);
+    }
 
     async function loadSchedule() {
         const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(SHEET_TAB)}?key=${API_KEY}`;
@@ -138,15 +155,22 @@
 
             const skipped = SKIPPED.some(s => date.includes(s));
 
-            const infoCell = document.createElement('td');
+            const teacherCell = document.createElement('td');
             if (skipped) {
-                infoCell.innerHTML = '<span class="no-class">No class</span>';
+                teacherCell.innerHTML = '<span class="no-class">No class</span>';
             } else {
-                let html = teacher ? `<div class="class-teacher">${escapeHtml(teacher)}</div>` : '';
-                if (title) html += `<div class="class-description">${escapeHtml(title)}</div>`;
-                infoCell.innerHTML = html;
+                const emoji = teacher ? emojiFor(teacher) : '👤';
+                const nameHtml = teacher ? escapeHtml(teacher) : '<span class="no-class" style="font-size:0.75rem">TBD</span>';
+                const mobileClassHtml = title ? `<div class="mobile-class">${escapeHtml(title)}</div>` : '';
+                teacherCell.innerHTML = `<div class="teacher-cell"><span class="teacher-avatar">${emoji}</span><div>${nameHtml}${mobileClassHtml}</div></div>`;
             }
-            tr.appendChild(infoCell);
+            tr.appendChild(teacherCell);
+
+            const classCell = document.createElement('td');
+            if (!skipped && title) {
+                classCell.innerHTML = `<span class="class-description">${escapeHtml(title)}</span>`;
+            }
+            tr.appendChild(classCell);
 
             const signupCell = document.createElement('td');
             if (!skipped) {
