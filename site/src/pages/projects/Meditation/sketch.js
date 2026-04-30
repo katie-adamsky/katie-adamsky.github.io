@@ -32,8 +32,8 @@ let avgSpeed = 0.0025, speedStdDev = 0.0005;
 let avgOffset = 100, offsetStdDev = 25;
 
 
-function setup(p5) {
-  p5.createCanvas(1000, 600);
+function setup(p5, width) {
+  p5.createCanvas(width, 600);
   diameter = 50;
   particles = Array.from({length: numParticles}, () =>
     new Particle(
@@ -43,7 +43,6 @@ function setup(p5) {
         avgOffset + offsetStdDev*Math.sqrt(-2 * Math.log(Math.random())) * Math.cos(2 * Math.PI * Math.random()),
     )
   );
-  console.log(particles);
 }
 
 function changeState(state) {

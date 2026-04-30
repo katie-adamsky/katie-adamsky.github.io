@@ -10,9 +10,20 @@ function setupBasedOnScreenSize(p5, props) {
     if (width > 1000) {
       width = 1000;
     }
-    setup(p5);
+    setup(p5, width);
   }
 }
+
+function handleResize(p5, props) {
+    return () => {
+      let {width} = props;
+      if (width > 1000) {
+        width = 1000;
+      } 
+      p5.resizeCanvas(width, 600);
+      p5.background(p5.color(0, 0, 0, 5));
+    }
+  }
 
 function sketch(p5) {
   let state = {
@@ -24,6 +35,7 @@ function sketch(p5) {
   };
 
   p5.setup = setupBasedOnScreenSize(p5, state);
+  p5.windowResized = handleResize(p5, state);
   p5.draw = () => {
     draw(p5);
   }
@@ -55,13 +67,18 @@ const Bell = () => {
     }
 }
 
-const Countdown = ({ minutes, timerEnded }) => {
+const Countdown = ({ minutes, timerEnded, intervalValue, intervalElapsed }) => {
     const [seconds, setSeconds] = useState(minutes * 60);
+    const [intervalCountdown, setIntervalCountdown] = useState(intervalValue * 60);
 
     useEffect(() => {
       const timer = setInterval(() => {
         if (seconds > 0) {
+          setIntervalCountdown((prevVal) => prevVal-1);
           setSeconds((prevSeconds) => prevSeconds - 1);
+          if (intervalCountdown === 0) {
+            
+          }
         } else {
           timerEnded();
           clearInterval(timer);
@@ -83,12 +100,20 @@ const Countdown = ({ minutes, timerEnded }) => {
 function Timer() {
     const [timerValue, setTimerValue] = useState(10);
     const [timerStarted, setTimerStarted] = useState(false);
+    const [intervalValue, setIntervalValue] = useState(null);
+    const [intervalStartValue, setIntervalStartValue] = useState(null);
     const audio = Bell();
 
     const startTimer = () => {
+        setIntervalStartValue(intervalValue);
         audio?.pause();
         setTimerStarted(true);
     };
+
+    const intervalElapsed = () => {
+        setIntervalValue(intervalStartValue);
+        audio?.play();
+    }
 
     const timerEnded = () => {
         audio?.play();
@@ -99,7 +124,7 @@ function Timer() {
         <div className="timer">
             {!timerStarted && 
             (<>
-            <label htmlFor="numberSlider">Set the timer:</label>
+            <label htmlFor="timer">Set the timer:</label>
             <input
                 type="range"
                 id="timer"
@@ -110,9 +135,27 @@ function Timer() {
                 onChange={(e) => setTimerValue(Number(e.target.value))}
                 />
             <span>{timerValue}</span>
+            <label htmlFor="interval">Set an interval:</label>
+            <input
+                type="range"
+                id="interval"
+                name="interval"
+                min={0}
+                max={120}
+                step={1}
+                onChange={(e) => setIntervalValue(Number(e.target.value))}
+                />
+            <span>{intervalValue}</span>
             <button onClick={startTimer}>Begin</button>
             </>)}
-            {timerStarted && (<Countdown minutes={timerValue} timerEnded={timerEnded}/>)}
+            {timerStarted && (
+                <Countdown 
+                    minutes={timerValue}
+                    timerEnded={timerEnded}
+                    intervalValue={intervalValue}
+                    intervalElapsed={intervalElapsed}
+                />
+            )}
         </div>
     );
 }
@@ -129,9 +172,18 @@ function MeditationP5() {
 const Meditation = new Project(
   'Meditation Timer', 
   'Visualize your breathing and time your meditations', 
+  <>
   <p>
-
-  </p>, 
+    This is a simple meditation timer, which I made to replace the core functionality of an app I was spending money on.
+    You can set a timer and it will ring a bell at the intervals you specify - this is useful for if you have multiple 
+    techniques you are learning and you want to compartmentalize your meditation without having to constantly check the time.
+  </p>
+  <p>
+    The animation is a box breathing exercise - inhale while the circle is expanding, hold your breath while the circle is stopped,
+    exhale while it's contracting, then hold again until it starts expanding. It's nice to do a couple rounds of this breathing 
+    to start your meditation, to calm your nervous system and allow you to connect with your breath.
+  </p>
+  </>, 
   <MeditationP5 />,
   "https://github.com/katie-adamsky/katie-adamsky.github.io/blob/main/site/src/pages/projects/Meditation/sketch.js",
   "purple"
